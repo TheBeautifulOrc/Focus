@@ -1,0 +1,19 @@
+### Ignore everything
+*
+
+### Except...
+# subfolders
+!*/
+# .gitignore files
+!.gitignore
+# Scons files
+!SConstruct
+!SConscript
+# Markdown
+!*.md
+# C/C++ files
+!*.c
+!*.cpp
+!*.h
+!*.hpp
+!*.cppm
