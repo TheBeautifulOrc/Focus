@@ -20,16 +20,19 @@ Many game engines put a strong emphasis on accessability for people who are not 
 However this also leads to oversimplification and restricts creative expression when designing the architecture of your game.
 
 ### 3. C++ all the way!
-This point strongly coincides with the aforementioned one. C++ is often used to write game engines, due to its efficient performance and mature set of features. However when it comes to writing actual games on top of these engines, most game engines encourage developers to use alternative languages such as C# or scripting languages. 
+This point strongly coincides with the aforementioned one. C++ is often used to create game engines, due to its efficient performance and mature set of features. However when it comes to writing actual games on top of these engines, most game engines encourage developers to use alternative languages such as C# or scripting languages. 
 
-The choice of adding an additional language (and thus complexity) is usually justified by the statement that C++ is too verbose for game development and eventually slows down the overall creative process. However looking at the changes introduced to the C++ ISO-standard with C++11 and C++20 respectively, most criticism of C++ seems to be either outdated or purely anecdotal to begin with. 
+The choice of supporting an additional language (and thus adding more complexity) is usually justified by the statement that C++ is too verbose for game development and eventually slows down the overall creative process. However looking at the syntax of modern C++, specifically the changes introduced to the C++ ISO-standard with C++11 and C++20, most points of criticism regarding C++ seem to be either outdated or purely anecdotal to begin with. 
 
 The often quoted paradigm of *"sticking to an easy language and only bothering with C++, when writing performance-critical, complex code"* also seems illogical, considering that every piece of code in a video game may be performance critical and that the complexity of  code is something gradual, that can not be separated into to discrete categories. 
 
-Finally supporting C++ as the sole programming language for the Focus Engine leads to a higher-quality, lower-effort C++-API, which also grants developers direct access to all core features and inner workings of the engine itself. It is also obvious that a custom scripting language will never reach the maturity, feature-density and community support of the C++ programming language.
+Finally supporting C++ as the sole programming language for the Focus Engine leads to a higher-quality C++-API, which also grants developers direct access to all its core features and inner workings. It is also obvious that a custom scripting language will never reach the maturity, feature-density and community support the C++ programming language already has.
 
 ### 4. No forced patterns
-Unlike many other engines Focus Engine does not enforce patterns like the Entity-Component-System or top-down-workflows. This gives the developer more freedom of expressing his thoughts through code, without engine-specific restrictions.
+Unlike many other engines Focus Engine does not enforce patterns like the Entity-Component-System or other top-down-workflows. This gives the developer more freedom of expressing his thoughts through code, without engine-specific restrictions.
 
-### 5. Powerful and cross-platform
-The Focus Engine, its editor and of course the games created with them are meant to run on Linux, MacOS and Windows, so that users on every of these major platform may benefit from this project.
+### 5. Cross-platform
+The Focus Engine, its editor and of course the games created with them are meant to run on Linux, MacOS and Windows, so that users on every of these major platforms may benefit from this project.
+
+### 6. Powerful graphics
+The Focus Engine utilizes the Vulkan graphics API to render images. This low-level API grants more control and efficient usage of the host systems resources. 
