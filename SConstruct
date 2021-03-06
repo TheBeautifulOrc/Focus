@@ -1,3 +1,7 @@
+###
+# Top-level SCons script
+###
+
 # pylint: skip-file
 
 env = Environment(
@@ -6,6 +10,6 @@ env = Environment(
 )
 
 SConscript(
-	['engine/SConscript'],
+	['engine/core/SConscript'],
 	exports = ['env']
 )

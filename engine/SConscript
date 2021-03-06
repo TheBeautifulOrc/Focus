@@ -1,6 +1,0 @@
-# pylint: skip-file
-
-Import('env')
-env = env.Clone()
-
-env.Program('build/Engine', 'src/main.cpp')
