@@ -8,13 +8,13 @@
 
 namespace focus
 {
-	auto getInstanceGLFW() -> InstanceGLFW&
+	auto getWindowManger() -> WindowManager&
 	{
-		static InstanceGLFW instance;
+		static WindowManager instance;
 		return instance;
 	}
 
-	InstanceGLFW::InstanceGLFW()
+	WindowManager::WindowManager()
 	{
 		if (!glfwInit())
 		{
@@ -23,12 +23,12 @@ namespace focus
 		glfwSetErrorCallback(errorCallback);
 	}
 
-	InstanceGLFW::~InstanceGLFW()
+	WindowManager::~WindowManager()
 	{
 		glfwTerminate();
 	}
 
-	void InstanceGLFW::errorCallback(int error, const char* errorDescription)
+	void WindowManager::errorCallback(int error, const char* errorDescription)
 	{
 		throw std::runtime_error("GLFW-Error " + std::to_string(error) + ", " + errorDescription);
 	}

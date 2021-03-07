@@ -1,0 +1,14 @@
+###
+# Engine Core
+###
+
+#pylint: skip-file
+
+from os.path import join
+from glob import glob
+
+Import('env')
+
+coreSource = glob(pathname='src/core/**/*.cpp', recursive=True)
+
+core = env.SharedLibrary('./shared/core', coreSource, LIBS=['glfw'])

@@ -18,29 +18,21 @@ def getSubdirs(path):
 
 folders = sorted(getSubdirs('.'))
 
-# Find relevant files and locations
+# Find all SConscript files
 sconscripts = []
-includePaths = []
 for folder in folders:
 	sconscripts.extend(Glob(join(folder, 'SConscript')))
-	if any([f.endswith(('.h', '.hpp')) for f in os.listdir(folder)]):
-		includePaths.append('#'+folder)
 
 # Environment settings
 env = Environment(
 	CC='g++',
 	CCFLAGS=['-std=c++17'],
-	CPPPATH=includePaths,
-	LIBPATH=['#build', '#build/shared', '#build/static']
+	CPPPATH=['#engine/include'],
+	LIBPATH=['#engine/shared']
 )
-
-# Binary destination
-buildPath = '#build'
-staticPath = join(buildPath, 'static')
-sharedPath = join(buildPath, 'shared')
 
 # Execute SConscripts
 SConscript(
 	sconscripts,
-	exports = ['env', 'buildPath', 'staticPath', 'sharedPath']
+	exports = ['env']
 )

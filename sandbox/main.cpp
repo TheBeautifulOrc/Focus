@@ -1,11 +1,10 @@
 #include <iostream>
+#include "engine/core.hpp"
 
 using std::cout, std::endl, std::boolalpha;
 
-#include "window.hpp"
-
-int main(int argc, char* argv[])
+int main(int argc, char** argv)
 {
-	auto& glfwInstance = focus::getInstanceGLFW();
+	auto& windowManager = focus::getWindowManager();
 	return 0;
 }

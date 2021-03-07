@@ -6,6 +6,6 @@
 
 from os.path import join
 
-Import('env', 'buildPath', 'staticPath', 'sharedPath')
+Import('env')
 
-env.Program(join(buildPath,'EngineTest'), ['main.cpp'], LIBS=['engineCore'])
+env.Program('./bin/SandboxApp', ['main.cpp'], LIBS=['core'])
