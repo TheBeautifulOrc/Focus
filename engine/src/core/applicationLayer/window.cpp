@@ -8,7 +8,7 @@
 
 namespace focus
 {
-	auto getWindowManger() -> WindowManager&
+	auto getWindowManager() -> WindowManager&
 	{
 		static WindowManager instance;
 		return instance;
