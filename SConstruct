@@ -31,15 +31,16 @@ env = Environment(
 	CC='g++',
 	CCFLAGS=['-std=c++17'],
 	CPPPATH=includePaths,
-	LIBPATH=['#/build/lib']
+	LIBPATH=['#build', '#build/shared', '#build/static']
 )
 
 # Binary destination
 buildPath = '#build'
-libPath = join(buildPath, 'lib')
+staticPath = join(buildPath, 'static')
+sharedPath = join(buildPath, 'shared')
 
 # Execute SConscripts
 SConscript(
 	sconscripts,
-	exports = ['env', 'buildPath', 'libPath']
+	exports = ['env', 'buildPath', 'staticPath', 'sharedPath']
 )
