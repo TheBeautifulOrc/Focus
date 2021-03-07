@@ -1,11 +1,13 @@
 ###
-# Application Layer 
+# Application Layer
 ###
 
 #pylint: skip-file
 
-Import('env', 'buildPath')
+from os.path import join
 
-window = env.SharedLibrary(buildPath+'libs/window', ['window.cpp'], LIBS=['glfw'])
+Import('env', 'buildPath', 'libPath')
+
+window = env.SharedLibrary(join(libPath,'window'), ['window.cpp'], LIBS=['glfw'])
 
 Return('window')
