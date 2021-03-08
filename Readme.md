@@ -19,6 +19,8 @@ Many game engines put a strong emphasis on accessability for people who are not 
 
 However this oversimplification also leads to unnecessary restrictions of creative expression when designing the architecture of more sophisticated games.
 
+Because of that the Focus Engine is setup with as little boilerplate as possible, in order to fit nicely in every game developers workflow.
+
 ### 3. C++ all the way!
 This point strongly coincides with the aforementioned one. C++ is often used to create game engines, due to its efficient performance and mature set of features. However when it comes to writing actual games on top of these engines, most game engines encourage developers to use alternative languages such as C# or scripting languages.
 
