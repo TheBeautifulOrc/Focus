@@ -21,6 +21,8 @@ However this oversimplification also leads to unnecessary restrictions of creati
 
 Because of that the Focus Engine is setup with as little boilerplate as possible, in order to fit nicely in every game developers workflow.
 
+This also means that the Focus Engine does not enforce patterns like the Entity-Component-System or other top-down-workflows, to give you more freedom of expressing his thoughts through code, without too many engine-specific restrictions.
+
 ### 3. C++ all the way!
 This point strongly coincides with the aforementioned one. C++ is often used to create game engines, due to its efficient performance and mature set of features. However when it comes to writing actual games on top of these engines, most game engines encourage developers to use alternative languages such as C# or scripting languages.
 
@@ -30,11 +32,8 @@ The often quoted paradigm of *"sticking to an easy language and only bothering w
 
 Finally supporting C++ as the sole programming language for the Focus Engine leads to a higher-quality C++-API, which also grants developers direct access to all its core features and inner workings. It is also obvious that a custom scripting language will never reach the maturity, feature-density and community support the C++ programming language already has.
 
-### 4. No forced patterns
-Unlike many other engines Focus Engine does not enforce patterns like the Entity-Component-System or other top-down-workflows. This gives the developer more freedom of expressing his thoughts through code, without engine-specific restrictions.
-
-### 5. Cross-platform
+### 4. Cross-platform
 The Focus Engine, its editor and of course the games created with them are meant to run on Linux, MacOS and Windows, so that users on every of these major platforms may benefit from this project.
 
-### 6. Powerful graphics
+### 5. Powerful graphics
 The Focus Engine utilizes the Vulkan graphics API to render images. This low-level API grants fine control and efficient usage of the host systems GPU.
