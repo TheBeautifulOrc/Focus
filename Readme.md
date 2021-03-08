@@ -28,7 +28,7 @@ This point strongly coincides with the aforementioned one. C++ is often used to 
 
 The choice of supporting an additional language (and thus adding more complexity) is usually justified by the statement that C++ is too verbose for game development and eventually slows down the overall creative process. However looking at the syntax of modern C++, specifically the changes introduced to the C++ ISO-standard with C++11 and C++20, most points of criticism regarding C++ seem to be either outdated or purely anecdotal to begin with.
 
-The often quoted paradigm of *"sticking to an easy language and only bothering with C++, when writing performance-critical, complex code"* also seems illogical, considering that every piece of code in a video game may be performance critical and that the complexity of code is something, which can not be easily determined or separated into to discrete categories.
+The often quoted paradigm of *"sticking to an easy language and only bothering with C++, when writing performance-critical, complex code"* also seems illogical, considering that every piece of code in a video game may be performance critical and that the complexity of code is something, which can not be easily evaluated.
 
 Finally supporting C++ as the sole programming language for the Focus Engine leads to a higher-quality C++-API, which also grants developers direct access to all its core features and inner workings. It is also obvious that a custom scripting language will never reach the maturity, feature-density and community support the C++ programming language already has.
 
