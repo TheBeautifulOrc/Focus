@@ -12,7 +12,7 @@ The Focus Engine consists of the actual game engine itself and an editor.
 While there already are many other game engines, most of them perfectly functional and ready to use, the Focus Engine aims to combine the following features into a unique package:
 
 ### 1. Free and Open-Source
-Unlike many other game engines the Focus Engine (and all of its source code) are released under the Apache-2.0 Licence. This means the engine is (and will always be) free to use, modify and redistribute in any way you desire.
+Unlike many other game engines the Focus Engine and all of its source code are released under the Apache-2.0 Licence. This means the engine is and will always be free to use, modify and redistribute in any way you desire.
 
 ### 2. Aimed at engineers and programmers
 Many game engines put a strong emphasis on accessability for people who are not comfortable with writing complex code or maintaining large code bases. Instead they offer heavy abstraction layers that allow non-programmers to create simple games without writing too much (or in extreme cases any) source code.
