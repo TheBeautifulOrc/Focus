@@ -8,7 +8,7 @@
 
 namespace focus
 {
-	auto getWindowManager() -> WindowManager&
+	auto create_window_manager() -> WindowManager&
 	{
 		static WindowManager instance;
 		return instance;
@@ -20,7 +20,7 @@ namespace focus
 		{
 			throw std::runtime_error("GLFW initialization failed");
 		}
-		glfwSetErrorCallback(errorCallback);
+		glfwSetErrorCallback(error_callback);
 	}
 
 	WindowManager::~WindowManager()
@@ -28,9 +28,9 @@ namespace focus
 		glfwTerminate();
 	}
 
-	void WindowManager::errorCallback(int error, const char* errorDescription)
+	void WindowManager::error_callback(int error, const char* error_description)
 	{
-		throw std::runtime_error("GLFW-Error " + std::to_string(error) + ", " + errorDescription);
+		throw std::runtime_error("GLFW-Error " + std::to_string(error) + ", " + error_description);
 	}
 
 } // namespace focus

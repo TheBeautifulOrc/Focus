@@ -2,9 +2,10 @@
 #include "engine/core.hpp"
 
 using std::cout, std::endl, std::boolalpha;
+using namespace focus;
 
 int main(int argc, char** argv)
 {
-	auto& windowManager = focus::getWindowManager();
+	Application app;
 	return 0;
 }

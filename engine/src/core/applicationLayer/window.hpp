@@ -7,7 +7,7 @@ namespace focus
 	class WindowManager
 	{
 	private:
-		static void errorCallback(int error, const char* errorDescription);
+		static void error_callback(int error, const char* error_description);
 
 	public:
 		WindowManager();
@@ -17,6 +17,6 @@ namespace focus
 		void operator=(const WindowManager&) = delete;
 	};
 
-	auto getWindowManager() -> WindowManager&;
+	auto create_window_manager() -> WindowManager&;
 
 } // namespace focus
