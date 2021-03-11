@@ -1,8 +1,5 @@
 #include "window.hpp"
 
-#include <string>
-#include <iostream>
-
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
@@ -18,7 +15,7 @@ namespace focus
 	{
 		if (!glfwInit())
 		{
-			throw std::runtime_error("GLFW initialization failed");
+			//throw std::runtime_error("GLFW initialization failed");
 		}
 		glfwSetErrorCallback(error_callback);
 	}
@@ -30,7 +27,7 @@ namespace focus
 
 	void WindowManager::error_callback(int error, const char* error_description)
 	{
-		throw std::runtime_error("GLFW-Error " + std::to_string(error) + ", " + error_description);
+		//throw std::runtime_error("GLFW-Error " + std::to_string(error) + ", " + error_description);
 	}
 
 } // namespace focus
