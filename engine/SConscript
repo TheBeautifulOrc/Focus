@@ -10,8 +10,8 @@ from glob import glob
 Import('env')
 
 coreEnv = env.Clone()
-coreEnv.Append(CPPPATH=['#engine/src/core', '#engine/vendor/spdlog/include'])
+coreEnv.Append(CPPPATH=['#engine/src/core'])
 
 coreSource = glob(pathname='src/core/**/*.cpp', recursive=True)
 
-core = coreEnv.SharedLibrary('./shared/core', coreSource, LIBS=['glfw'])
+core = coreEnv.SharedLibrary('./shared/core', coreSource, LIBS=['glfw', 'fmt'])

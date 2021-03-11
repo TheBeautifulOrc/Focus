@@ -1,5 +1,7 @@
 #include "logger.hpp"
-#include "spdlog/spdlog.h"
+
+#define SPDLOG_FMT_EXTERNAL
+#include <spdlog/spdlog.h>
 
 namespace focus
 {
