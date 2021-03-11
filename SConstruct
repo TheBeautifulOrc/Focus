@@ -27,7 +27,7 @@ for folder in folders:
 env = Environment(
 	CC='g++',
 	CCFLAGS=['-std=c++17'],
-	CPPPATH=['#engine/include', '#engine/vendor'],
+	CPPPATH=['#engine/include'],
 	LIBPATH=['#engine/shared']
 )
 
