@@ -8,7 +8,7 @@
 #include "spdlog/sinks/ostream_sink.h"
 namespace focus
 {
-	Logger::Logger(const Logger::Type types, const std::string& name, std::string log_file, const ulong& rotation_file_size, const uint& n_rotation_files)
+	Logger::Logger(const Logger::LoggerType types, const std::string& name, std::string log_file, const ulong& rotation_file_size, const uint& n_rotation_files)
 	{
 		// If the name of the log_file has not been specified, use default
 		if (log_file.size() == 0)
@@ -18,23 +18,23 @@ namespace focus
 
 		// Create a spdlog::sink for each requested logger type
 		std::vector<std::shared_ptr<spdlog::sinks::sink>> requested_sinks;
-		if (types & Type::Console)
+		if (types & LoggerType::Console)
 		{
 			requested_sinks.push_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
 		}
-		if (types & Type::ConsoleError)
+		if (types & LoggerType::ConsoleError)
 		{
 			requested_sinks.push_back(std::make_shared<spdlog::sinks::stderr_color_sink_mt>());
 		}
-		if (types & Type::SimpleFile)
+		if (types & LoggerType::SimpleFile)
 		{
 			requested_sinks.push_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>(log_file));
 		}
-		if (types & Type::RotatingFile)
+		if (types & LoggerType::RotatingFile)
 		{
 			requested_sinks.push_back(std::make_shared<spdlog::sinks::rotating_file_sink_mt>(log_file, rotation_file_size, n_rotation_files, false));
 		}
-		if (types & Type::OStream)
+		if (types & LoggerType::OStream)
 		{
 			requested_sinks.push_back(std::make_shared<spdlog::sinks::ostream_sink_mt>(oss));
 		}
@@ -48,6 +48,5 @@ namespace focus
 	{
 
 	}
-
 
 } // namespace focus
