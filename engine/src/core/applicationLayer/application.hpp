@@ -1,22 +1,20 @@
 #pragma once
 
 #include <memory>
+#include "../core_component.hpp"
 
 namespace focus
 {
 	class WindowManager;
-	class Logger;
 
-	class Application
+	class Application : public CoreComponent
 	{
-	private:
-		WindowManager* window_manager;
-		std::shared_ptr<Logger> logger;
+	protected:
+		std::shared_ptr<WindowManager> window_manager;
 	public:
-		Application();
+		Application(std::string _name);
 		~Application();
-		auto get_window_manager() const -> WindowManager*;
-		auto get_logger() const -> std::shared_ptr<Logger>;
+		auto get_window_manager() const -> std::shared_ptr<WindowManager>;
 	};
 
 } // namespace focus

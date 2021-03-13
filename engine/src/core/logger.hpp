@@ -13,7 +13,7 @@ namespace focus
 	class Logger
 	{
 	public:
-		enum LoggerType
+		enum Type
 		{
 			Console 		= 0b00001,
 			ConsoleError	= 0b00010,
@@ -27,7 +27,7 @@ namespace focus
 		std::ostringstream oss;
 
 	public:
-		Logger(const Logger::LoggerType types, const std::string& name, std::string log_file="", const ulong& rotation_file_size=1024*1024*5, const uint& n_rotation_files=3);
+		Logger(const std::string& name, const Logger::Type types=Type::Console, std::string log_file="", const ulong& rotation_file_size=1024*1024*5, const uint& n_rotation_files=3);
 		~Logger();
 
 		template<typename FormatString, typename... Args>

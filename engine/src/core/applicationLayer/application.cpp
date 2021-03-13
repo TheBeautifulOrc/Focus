@@ -1,14 +1,12 @@
 #include "application.hpp"
 
-#include "logger.hpp"
 #include "window.hpp"
 
 namespace focus
 {
-	Application::Application()
+	Application::Application(std::string _name) : CoreComponent(_name)
 	{
-		window_manager = &create_window_manager();
-		logger = std::make_unique<Logger>(Logger::Console, "Application");
+		window_manager = std::make_shared<WindowManager>();
 	}
 
 	Application::~Application()
@@ -16,13 +14,9 @@ namespace focus
 
 	}
 
-	auto Application::get_window_manager() const -> WindowManager*
+	auto Application::get_window_manager() const -> std::shared_ptr<WindowManager>
 	{
 		return window_manager;
 	}
 
-	auto Application::get_logger() const -> std::shared_ptr<Logger>
-	{
-		return logger;
-	}
 } // namespace focus

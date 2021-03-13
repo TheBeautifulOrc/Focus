@@ -6,6 +6,6 @@ using namespace focus;
 
 int main(int argc, char** argv)
 {
-	Application app;
+	Application app("Sandbox Game");
 	return 0;
 }
