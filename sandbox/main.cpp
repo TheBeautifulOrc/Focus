@@ -7,6 +7,5 @@ using namespace focus;
 int main(int argc, char** argv)
 {
 	Application app;
-
 	return 0;
 }

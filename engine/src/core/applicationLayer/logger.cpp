@@ -40,8 +40,7 @@ namespace focus
 		}
 
 		logger = std::make_shared<spdlog::logger>(name, requested_sinks.begin(), requested_sinks.end());
-		// TODO: Come up with sensible pattern
-		logger->set_pattern("*** [%H:%M:%S] [thread %t] %v");
+		// TODO: Come up with sensible pattern, chose default for now
 	}
 
 	Logger::~Logger()
