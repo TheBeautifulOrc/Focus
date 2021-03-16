@@ -4,9 +4,9 @@
 
 namespace focus
 {
-	Application::Application(std::string _name) : CoreComponent(_name)
+	Application::Application(std::string _name) : EngineComponent(_name)
 	{
-		window_manager = std::make_shared<WindowManager>();
+		window_manager = std::make_unique<WindowManager>();
 	}
 
 	Application::~Application()
@@ -14,9 +14,9 @@ namespace focus
 
 	}
 
-	auto Application::get_window_manager() const -> std::shared_ptr<WindowManager>
+	auto Application::get_window_manager() const -> const WindowManager&
 	{
-		return window_manager;
+		return *window_manager;
 	}
 
 } // namespace focus

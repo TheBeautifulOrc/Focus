@@ -7,7 +7,7 @@
 namespace focus
 {
 	class Logger;
-	class WindowManager : public CoreComponent
+	class WindowManager : public EngineComponent
 	{
 	private:
 		static void error_callback(int error, const char* error_description);

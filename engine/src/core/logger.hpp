@@ -15,15 +15,15 @@ namespace focus
 	public:
 		enum Type
 		{
-			Console 		= 0b00001,
-			ConsoleError	= 0b00010,
-			SimpleFile 		= 0b00100,
-			RotatingFile	= 0b01000,
-			OStream 		= 0b10000,
+			Console 		= (1 << 0),
+			ConsoleError	= (1 << 1),
+			SimpleFile 		= (1 << 2),
+			RotatingFile	= (1 << 3),
+			OStream 		= (1 << 4),
 		};
 
 	private:
-		std::shared_ptr<spdlog::logger> logger;
+		std::unique_ptr<spdlog::logger> spd_logger;
 		std::ostringstream oss;
 
 	public:
@@ -33,19 +33,19 @@ namespace focus
 		template<typename FormatString, typename... Args>
 		inline void info(const FormatString& fmt, Args&&... args)
 		{
-			logger->info(fmt, args...);
+			spd_logger->info(fmt, args...);
 		}
 
 		template<typename FormatString, typename... Args>
 		inline void warning(const FormatString& fmt, Args&&... args)
 		{
-			logger->warn(fmt, args...);
+			spd_logger->warn(fmt, args...);
 		}
 
 		template<typename FormatString, typename... Args>
 		inline void error(const FormatString& fmt, Args&&... args)
 		{
-			logger->error(fmt, args...);
+			spd_logger->error(fmt, args...);
 		}
 	};
 } // namespace focus

@@ -39,7 +39,7 @@ namespace focus
 			requested_sinks.push_back(std::make_shared<spdlog::sinks::ostream_sink_mt>(oss));
 		}
 
-		logger = std::make_shared<spdlog::logger>(name, requested_sinks.begin(), requested_sinks.end());
+		spd_logger = std::make_unique<spdlog::logger>(name, requested_sinks.begin(), requested_sinks.end());
 		// TODO: Come up with sensible pattern, chose default for now
 	}
 

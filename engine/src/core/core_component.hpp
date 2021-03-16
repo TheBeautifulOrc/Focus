@@ -7,15 +7,15 @@ namespace focus
 {
 	class Logger;
 
-	class CoreComponent
+	class EngineComponent
 	{
 	protected:
 		std::string name;
-		std::shared_ptr<Logger> logger;
+		std::unique_ptr<Logger> logger;
 	public:
-		CoreComponent(const std::string& _name);
-		~CoreComponent();
-		auto get_logger() const -> std::shared_ptr<Logger>;
+		EngineComponent(const std::string& _name);
+		~EngineComponent();
+		auto get_logger() const -> const Logger&;
 	};
 
 } // namespace focus

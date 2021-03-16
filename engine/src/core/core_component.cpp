@@ -4,15 +4,15 @@
 
 namespace focus
 {
-	CoreComponent::CoreComponent(const std::string& _name) : name{_name}
+	EngineComponent::EngineComponent(const std::string& _name) : name{_name}
 	{
-		logger = std::make_shared<Logger>(name);
+		logger = std::make_unique<Logger>(name);
 	}
 
-	CoreComponent::~CoreComponent() = default;
+	EngineComponent::~EngineComponent() = default;
 
-	auto CoreComponent::get_logger() const -> std::shared_ptr<Logger>
+	auto EngineComponent::get_logger() const -> const Logger&
 	{
-		return logger;
+		return *logger;
 	}
 } // namespace focus

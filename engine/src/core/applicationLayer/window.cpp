@@ -7,7 +7,7 @@
 
 namespace focus
 {
-	WindowManager::WindowManager(std::string _name) : CoreComponent(_name)
+	WindowManager::WindowManager(std::string _name) : EngineComponent(_name)
 	{
 		if (!glfwInit())
 		{
