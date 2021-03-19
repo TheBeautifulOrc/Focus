@@ -8,14 +8,8 @@
 #include "spdlog/sinks/ostream_sink.h"
 namespace focus
 {
-	Logger::Logger(const std::string& name, const Logger::Type types, std::string log_file, const ulong& rotation_file_size, const uint& n_rotation_files)
+	Logger::Logger(const Logger::Type types, std::string log_file, const ulong& rotation_file_size, const uint& n_rotation_files)
 	{
-		// If the name of the log_file has not been specified, use default
-		if (log_file.size() == 0)
-		{
-			log_file = name+"_log";
-		}
-
 		// Create a spdlog::sink for each requested logger type
 		std::vector<std::shared_ptr<spdlog::sinks::sink>> requested_sinks;
 		if (types & Type::Console)
@@ -39,8 +33,10 @@ namespace focus
 			requested_sinks.push_back(std::make_shared<spdlog::sinks::ostream_sink_mt>(oss));
 		}
 
-		spd_logger = std::make_unique<spdlog::logger>(name, requested_sinks.begin(), requested_sinks.end());
-		// TODO: Come up with sensible pattern, chose default for now
+		spd_logger = std::make_unique<spdlog::logger>("logger", requested_sinks.begin(), requested_sinks.end());
+
+		spd_logger->set_pattern("[%H:%M:%S, %l]: %v");
+
 	}
 
 	Logger::~Logger()

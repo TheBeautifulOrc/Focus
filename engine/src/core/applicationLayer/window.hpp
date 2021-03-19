@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "../core_component.hpp"
+#include "../engine_component.hpp"
 
 namespace focus
 {

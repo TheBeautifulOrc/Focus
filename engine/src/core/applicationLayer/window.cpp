@@ -23,7 +23,7 @@ namespace focus
 
 	void WindowManager::error_callback(int error, const char* error_description)
 	{
-		Logger temp_logger("WindowManagerCallback", Logger::ConsoleError);
+		Logger temp_logger(Logger::ConsoleError);
 		temp_logger.error("GLFW-Error {}{}{}", std::to_string(error), ", ", error_description);
 	}
 

@@ -27,23 +27,23 @@ namespace focus
 		std::ostringstream oss;
 
 	public:
-		Logger(const std::string& name, const Logger::Type types=Type::Console, std::string log_file="", const ulong& rotation_file_size=1024*1024*5, const uint& n_rotation_files=3);
+		Logger(const Logger::Type types=Type::Console, std::string log_file="log", const ulong& rotation_file_size=1024*1024*5, const uint& n_rotation_files=3);
 		~Logger();
 
 		template<typename FormatString, typename... Args>
-		inline void info(const FormatString& fmt, Args&&... args)
+		inline void info(const FormatString& fmt, Args&&... args) const
 		{
 			spd_logger->info(fmt, args...);
 		}
 
 		template<typename FormatString, typename... Args>
-		inline void warning(const FormatString& fmt, Args&&... args)
+		inline void warning(const FormatString& fmt, Args&&... args) const
 		{
 			spd_logger->warn(fmt, args...);
 		}
 
 		template<typename FormatString, typename... Args>
-		inline void error(const FormatString& fmt, Args&&... args)
+		inline void error(const FormatString& fmt, Args&&... args) const
 		{
 			spd_logger->error(fmt, args...);
 		}

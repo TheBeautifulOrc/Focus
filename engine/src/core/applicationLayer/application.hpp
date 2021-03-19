@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include "../core_component.hpp"
+#include "../engine_component.hpp"
 
 namespace focus
 {
@@ -13,7 +13,7 @@ namespace focus
 		std::unique_ptr<WindowManager> window_manager;
 	public:
 		Application(std::string _name);
-		~Application();
+		~Application() = default;
 		auto get_window_manager() const -> const WindowManager&;
 	};
 

@@ -9,11 +9,6 @@ namespace focus
 		window_manager = std::make_unique<WindowManager>();
 	}
 
-	Application::~Application()
-	{
-
-	}
-
 	auto Application::get_window_manager() const -> const WindowManager&
 	{
 		return *window_manager;
