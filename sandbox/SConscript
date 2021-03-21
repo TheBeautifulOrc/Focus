@@ -8,4 +8,4 @@ from os.path import join
 
 Import('env')
 
-env.Program('./bin/SandboxApp', ['main.cpp'], LIBS=['core', 'fmt', 'spdlog'])
+env.Program('./bin/SandboxApp', ['main.cpp'], LIBS=['core'])

@@ -39,9 +39,19 @@ namespace focus
 
 	}
 
-	Logger::~Logger()
+	void Logger::info(const std::string msg) const
 	{
+		spd_logger->info(msg);
+	}
 
+	void Logger::warning(const std::string msg) const
+	{
+		spd_logger->warn(msg);
+	}
+
+	void Logger::error(const std::string msg) const
+	{
+		spd_logger->error(msg);
 	}
 
 } // namespace focus

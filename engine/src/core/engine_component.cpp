@@ -14,9 +14,24 @@ namespace focus
 
 	}
 
-	auto EngineComponent::get_logger() -> const Logger&
+	auto EngineComponent::get_logger() const -> const Logger&
 	{
 		return *logger;
+	}
+
+	void EngineComponent::info(const std::string _msg) const
+	{
+		logger->info(_msg);
+	}
+
+	void EngineComponent::warning(const std::string _msg) const
+	{
+		logger->warning(_msg);
+	}
+
+	void EngineComponent::error(const std::string _msg) const
+	{
+		logger->error(_msg);
 	}
 
 	auto EngineComponent::get_name() const -> const std::string&

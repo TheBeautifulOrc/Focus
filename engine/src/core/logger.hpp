@@ -22,30 +22,16 @@ namespace focus
 			OStream 		= (1 << 4),
 		};
 
+		Logger(const Logger::Type types=Type::Console, std::string log_file="log", const ulong& rotation_file_size=1024*1024*5, const uint& n_rotation_files=3);
+		~Logger() = default;
+
+		void info(const std::string msg) const;
+		void warning(const std::string msg) const;
+		void error(const std::string msg) const;
+
 	private:
 		std::unique_ptr<spdlog::logger> spd_logger;
 		std::ostringstream oss;
 
-	public:
-		Logger(const Logger::Type types=Type::Console, std::string log_file="log", const ulong& rotation_file_size=1024*1024*5, const uint& n_rotation_files=3);
-		~Logger();
-
-		template<typename FormatString, typename... Args>
-		inline void info(const FormatString& fmt, Args&&... args) const
-		{
-			spd_logger->info(fmt, args...);
-		}
-
-		template<typename FormatString, typename... Args>
-		inline void warning(const FormatString& fmt, Args&&... args) const
-		{
-			spd_logger->warn(fmt, args...);
-		}
-
-		template<typename FormatString, typename... Args>
-		inline void error(const FormatString& fmt, Args&&... args) const
-		{
-			spd_logger->error(fmt, args...);
-		}
 	};
 } // namespace focus
