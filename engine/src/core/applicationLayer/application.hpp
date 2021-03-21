@@ -10,7 +10,7 @@ namespace focus
 	class Application : public EngineComponent
 	{
 	public:
-		Application(std::string _name);
+		Application(std::string _name, std::shared_ptr<Logger> _logger = nullptr, std::unique_ptr<WindowManager> _window_manager = nullptr);
 		~Application() = default;
 
 		auto get_window_manager() const -> const WindowManager&;
