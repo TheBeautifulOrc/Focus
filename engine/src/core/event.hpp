@@ -14,13 +14,6 @@ namespace focus
 		std::string name;
 	};
 
-	class EventDispatcher
-	{
-	public:
-		EventDispatcher();
-		~EventDispatcher();
-	};
-
 	class InputEvent : public Event
 	{
 	public:

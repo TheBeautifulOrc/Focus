@@ -6,14 +6,6 @@ namespace focus
 	{
 	}
 
-	EventDispatcher::EventDispatcher()
-	{
-	}
-
-	EventDispatcher::~EventDispatcher()
-	{
-	}
-
 	InputEvent::InputEvent(const std::string& _name) : Event(_name)
 	{
 	}

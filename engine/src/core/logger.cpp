@@ -8,7 +8,7 @@
 #include "spdlog/sinks/ostream_sink.h"
 namespace focus
 {
-	Logger::Logger(const Logger::Type types, std::string log_file, const ulong& rotation_file_size, const uint& n_rotation_files)
+	Logger::Logger(const Logger::Type types, std::string log_file_name, const ulong& rotation_file_size, const uint& n_rotation_files)
 	{
 		// Create a spdlog::sink for each requested logger type
 		std::vector<std::shared_ptr<spdlog::sinks::sink>> requested_sinks;
@@ -22,11 +22,11 @@ namespace focus
 		}
 		if (types & Type::SimpleFile)
 		{
-			requested_sinks.push_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>(log_file));
+			requested_sinks.push_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>(log_file_name));
 		}
 		if (types & Type::RotatingFile)
 		{
-			requested_sinks.push_back(std::make_shared<spdlog::sinks::rotating_file_sink_mt>(log_file, rotation_file_size, n_rotation_files, false));
+			requested_sinks.push_back(std::make_shared<spdlog::sinks::rotating_file_sink_mt>(log_file_name, rotation_file_size, n_rotation_files, false));
 		}
 		if (types & Type::OStream)
 		{
