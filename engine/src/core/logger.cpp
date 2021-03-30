@@ -38,9 +38,19 @@ namespace focus
 		spd_logger->set_pattern("[%H:%M:%S] [%l] %v");
 	}
 
-	void Logger::info(const std::string& msg) const
+	void Logger::anonymous_info(const std::string& msg) const
 	{
 		spd_logger->info(msg);
+	}
+
+	void Logger::anonymous_warning(const std::string& msg) const
+	{
+		spd_logger->warn(msg);
+	}
+
+	void Logger::anonymous_error(const std::string& msg) const
+	{
+		spd_logger->error(msg);
 	}
 
 	void Logger::info(const std::string& caller_name, const std::string& msg) const
@@ -48,19 +58,9 @@ namespace focus
 		spd_logger->info("[" + caller_name + "]:\t" + msg);
 	}
 
-	void Logger::warning(const std::string& msg) const
-	{
-		spd_logger->warn(msg);
-	}
-
 	void Logger::warning(const std::string& caller_name, const std::string& msg) const
 	{
 		spd_logger->warn("[" + caller_name + "]:\t" + msg);
-	}
-
-	void Logger::error(const std::string& msg) const
-	{
-		spd_logger->error(msg);
 	}
 
 	void Logger::error(const std::string& caller_name, const std::string& msg) const

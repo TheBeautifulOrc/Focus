@@ -42,11 +42,25 @@ namespace focus
 		~Logger() = default;
 
 		/**
-		 * Logs info-level data.
+		 * Logs info-level data without specifying the caller.
 		 *
 		 * @param msg Message that shall be logged.
 		 */
-		void info(const std::string& msg) const;
+		void anonymous_info(const std::string& msg) const;
+
+		/**
+		 * Logs warning-level data without specifying the caller.
+		 *
+		 * @param msg Message that shall be logged.
+		 */
+		void anonymous_warning(const std::string& msg) const;
+
+		/**
+		 * Logs error-level data without specifying the caller.
+		 *
+		 * @param msg Message that shall be logged.
+		 */
+		void anonymous_error(const std::string& msg) const;
 
 		/**
 		 * Logs info-level data.
@@ -59,24 +73,10 @@ namespace focus
 		/**
 		 * Logs warning-level data.
 		 *
-		 * @param msg Message that shall be logged.
-		 */
-		void warning(const std::string& msg) const;
-
-		/**
-		 * Logs warning-level data.
-		 *
 		 * @param caller_name Name of the object calling this function.
 		 * @param msg Message that shall be logged.
 		 */
 		void warning(const std::string& caller_name, const std::string& msg) const;
-
-		/**
-		 * Logs error-level data.
-		 *
-		 * @param msg Message that shall be logged.
-		 */
-		void error(const std::string& msg) const;
 
 		/**
 		 * Logs error-level data.
