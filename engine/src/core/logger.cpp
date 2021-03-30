@@ -35,23 +35,37 @@ namespace focus
 
 		spd_logger = std::make_unique<spdlog::logger>("logger", requested_sinks.begin(), requested_sinks.end());
 
-		spd_logger->set_pattern("[%H:%M:%S, %l]: %v");
-
+		spd_logger->set_pattern("[%H:%M:%S] [%l] %v");
 	}
 
-	void Logger::info(const std::string msg) const
+	void Logger::info(const std::string& msg) const
 	{
 		spd_logger->info(msg);
 	}
 
-	void Logger::warning(const std::string msg) const
+	void Logger::info(const std::string& caller_name, const std::string& msg) const
+	{
+		spd_logger->info("[" + caller_name + "]:\t" + msg);
+	}
+
+	void Logger::warning(const std::string& msg) const
 	{
 		spd_logger->warn(msg);
 	}
 
-	void Logger::error(const std::string msg) const
+	void Logger::warning(const std::string& caller_name, const std::string& msg) const
+	{
+		spd_logger->warn("[" + caller_name + "]:\t" + msg);
+	}
+
+	void Logger::error(const std::string& msg) const
 	{
 		spd_logger->error(msg);
+	}
+
+	void Logger::error(const std::string& caller_name, const std::string& msg) const
+	{
+		spd_logger->error("[" + caller_name + "]:\t" + msg);
 	}
 
 } // namespace focus

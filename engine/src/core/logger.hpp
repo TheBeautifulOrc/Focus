@@ -46,21 +46,45 @@ namespace focus
 		 *
 		 * @param msg Message that shall be logged.
 		 */
-		void info(const std::string msg) const;
+		void info(const std::string& msg) const;
+
+		/**
+		 * Logs info-level data.
+		 *
+		 * @param caller_name Name of the object calling this function.
+		 * @param msg Message that shall be logged.
+		 */
+		void info(const std::string& caller_name, const std::string& msg) const;
 
 		/**
 		 * Logs warning-level data.
 		 *
 		 * @param msg Message that shall be logged.
 		 */
-		void warning(const std::string msg) const;
+		void warning(const std::string& msg) const;
+
+		/**
+		 * Logs warning-level data.
+		 *
+		 * @param caller_name Name of the object calling this function.
+		 * @param msg Message that shall be logged.
+		 */
+		void warning(const std::string& caller_name, const std::string& msg) const;
 
 		/**
 		 * Logs error-level data.
 		 *
 		 * @param msg Message that shall be logged.
 		 */
-		void error(const std::string msg) const;
+		void error(const std::string& msg) const;
+
+		/**
+		 * Logs error-level data.
+		 *
+		 * @param caller_name Name of the object calling this function.
+		 * @param msg Message that shall be logged.
+		 */
+		void error(const std::string& caller_name, const std::string& msg) const;
 
 	private:
 		// Underlying spdlog instance.
