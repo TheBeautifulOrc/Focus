@@ -2,12 +2,6 @@
 
 namespace focus
 {
-	Event::Event(const std::string& _name) : name{_name}
-	{
-	}
-
-	InputEvent::InputEvent(const std::string& _name) : Event(_name)
-	{
-	}
+	InputEvent::InputEvent(const std::string& _name) : IEvent(_name) {}
 
 } // namespace focus

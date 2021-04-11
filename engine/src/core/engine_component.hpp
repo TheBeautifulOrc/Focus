@@ -18,7 +18,7 @@ namespace focus
 	 *
 	 * Every other class that makes up the Focus Engine should (if possible) be a subclass of EngineComponent. This class provides basic functionalities like logging and integration into the event system.
 	 */
-	class EngineComponent : virtual public EventHandler
+	class EngineComponent : public IEventHandler
 	{
 	public:
 		/**
