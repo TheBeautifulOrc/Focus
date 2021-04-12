@@ -79,7 +79,7 @@ namespace focus
 		// Function to sort queued events by priority.
 		std::function<bool(EventPtr&, EventPtr&)> sort_events_by_priority = [](EventPtr& lhs, EventPtr& rhs)
 		{
-			return lhs->get_priority() > rhs->get_priority();
+			return lhs->get_priority() < rhs->get_priority();
 		};
 
 		// Queue for all buffered events.

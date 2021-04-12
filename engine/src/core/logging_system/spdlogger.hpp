@@ -4,6 +4,8 @@
 #include <memory>
 #include <sstream>
 
+#include "logger.hpp"
+
 #define SPDLOG_FMT_EXTERNAL
 #define SPDLOG_COMPILED_LIB
 #include <spdlog/spdlog.h>
@@ -11,11 +13,11 @@
 namespace focus
 {
 	/**
-	 * Wrapper class for external logging libraries.
+	 * @brief Wrapper class for spdlog logging library.
 	 *
-	 * This class serves as a wrapper between the focus engine and external logging  libraries. Currently 'spdlog' is used, however this may change in the future.
+	 * This class serves as a wrapper between the focus engine and spdlog.
 	 */
-	class Logger
+	class SPDLogger : public ILogger
 	{
 	public:
 		/**
@@ -33,34 +35,39 @@ namespace focus
 		/**
 		 * Logger constructor.
 		 *
-		 * @param types Logger::Type flags that indicate on which channels should be logged (multiple channels may be selected).
+		 * @param types SPDLogger::Type flags that indicate on which channels should be logged (multiple channels may be selected).
 		 * @param log_file_name Name of the log file that will be created (only relevant for simple file logging or rotation logging).
 		 * @param rotation_file_size Maximum file size of single log file during rotation logging (thus only relevant for rotation logging).
 		 * @param n_rotation_files Maximum number of rotating log files (only relevant for rotation logging).
 		 */
-		Logger(const Logger::Type types=Type::Console, std::string log_file_name="log", const ulong& rotation_file_size=1024*1024*5, const uint& n_rotation_files=3);
-		~Logger() = default;
+		SPDLogger(
+			const SPDLogger::Type types=Type::Console,
+			std::string log_file_name="log",
+			const ulong& rotation_file_size=1024*1024*5,
+			const uint& n_rotation_files=3
+		);
+		~SPDLogger() = default;
 
 		/**
 		 * Logs info-level data without specifying the caller.
 		 *
 		 * @param msg Message that shall be logged.
 		 */
-		void anonymous_info(const std::string& msg) const;
+		void anonymous_info(const std::string& msg) const override;
 
 		/**
 		 * Logs warning-level data without specifying the caller.
 		 *
 		 * @param msg Message that shall be logged.
 		 */
-		void anonymous_warning(const std::string& msg) const;
+		void anonymous_warning(const std::string& msg) const override;
 
 		/**
 		 * Logs error-level data without specifying the caller.
 		 *
 		 * @param msg Message that shall be logged.
 		 */
-		void anonymous_error(const std::string& msg) const;
+		void anonymous_error(const std::string& msg) const override;
 
 		/**
 		 * Logs info-level data.
@@ -68,7 +75,7 @@ namespace focus
 		 * @param caller_name Name of the object calling this function.
 		 * @param msg Message that shall be logged.
 		 */
-		void info(const std::string& caller_name, const std::string& msg) const;
+		void info(const std::string& caller_name, const std::string& msg) const override;
 
 		/**
 		 * Logs warning-level data.
@@ -76,7 +83,7 @@ namespace focus
 		 * @param caller_name Name of the object calling this function.
 		 * @param msg Message that shall be logged.
 		 */
-		void warning(const std::string& caller_name, const std::string& msg) const;
+		void warning(const std::string& caller_name, const std::string& msg) const override;
 
 		/**
 		 * Logs error-level data.
@@ -84,7 +91,7 @@ namespace focus
 		 * @param caller_name Name of the object calling this function.
 		 * @param msg Message that shall be logged.
 		 */
-		void error(const std::string& caller_name, const std::string& msg) const;
+		void error(const std::string& caller_name, const std::string& msg) const override;
 
 	private:
 		// Underlying spdlog instance.

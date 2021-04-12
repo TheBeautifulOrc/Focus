@@ -6,13 +6,11 @@
 #include <set>
 
 #include "event_system/event_handler.hpp"
-#include "logger.hpp"
+#include "logging_system/logger.hpp"
+#include "logging_system/spdlogger.hpp"
 
 namespace focus
 {
-	class Logger;
-	class Event;
-
 	/**
 	 * Basic component of the Focus Engine.
 	 *
@@ -26,7 +24,7 @@ namespace focus
 		 *
 		 * @return Constant reference of this objects logger.
 		 */
-		inline auto get_logger() const -> const Logger& { return *logger; }
+		inline auto get_logger() const -> const ILogger* { return logger.get(); }
 
 		/**
 		 * Logs info-level data.
@@ -67,7 +65,7 @@ namespace focus
 		// Name of this object.
 		std::string name;
 		// Instance of the logger this object uses to log its messages.
-		std::shared_ptr<Logger> logger;
+		std::shared_ptr<ILogger> logger;
 
 		/**
 		 * EngineComponent constructor. Not to be called directly.
@@ -75,7 +73,10 @@ namespace focus
 		 * @param _name Name of this object.
 		 * @param _logger Logger instance that this object shall use for its logging. If unspecified a new (default) logger will be created.
 		 */
-		EngineComponent(const std::string& _name, std::shared_ptr<Logger> _logger = nullptr);
+		EngineComponent(
+			const std::string& _name,
+			std::shared_ptr<ILogger> _logger=std::make_shared<SPDLogger>()
+		);
 
 		~EngineComponent() = default;
 	};

@@ -1,6 +1,7 @@
 #include "window.hpp"
 
-#include "../logger.hpp"
+#include "../logging_system/logger.hpp"
+#include "../logging_system/spdlogger.hpp"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -23,7 +24,7 @@ namespace focus
 
 	void WindowManager::_glfw_error_callback(int error, const char* error_description)
 	{
-		Logger temp_logger(Logger::ConsoleError);
+		SPDLogger temp_logger(SPDLogger::ConsoleError);
 		temp_logger.anonymous_error("GLFW-Error: " + std::to_string(error) + ", " + error_description);
 	}
 
