@@ -24,7 +24,7 @@ namespace focus
 		 *
 		 * @return Constant reference of this objects logger.
 		 */
-		inline auto get_logger() const -> const ILogger* { return logger.get(); }
+		inline auto get_logger() const -> const std::shared_ptr<ILogger> { return logger; }
 
 		/**
 		 * Logs info-level data.
@@ -71,11 +71,11 @@ namespace focus
 		 * EngineComponent constructor. Not to be called directly.
 		 *
 		 * @param _name Name of this object.
-		 * @param _logger Logger instance that this object shall use for its logging. If unspecified a new (default) logger will be created.
+		 * @param _logger Logger instance that this object shall use for its logging.
 		 */
 		EngineComponent(
 			const std::string& _name,
-			std::shared_ptr<ILogger> _logger=std::make_shared<SPDLogger>()
+			std::shared_ptr<ILogger> _logger
 		);
 
 		~EngineComponent() = default;
