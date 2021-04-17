@@ -4,7 +4,7 @@
 #include <memory>
 #include <sstream>
 
-#include "logger.hpp"
+#include "core/logging_system/logger.hpp"
 
 #define SPDLOG_FMT_EXTERNAL
 #define SPDLOG_COMPILED_LIB

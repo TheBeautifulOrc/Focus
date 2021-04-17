@@ -1,8 +1,8 @@
 #pragma once
 
 #include <memory>
-#include "engine_component.hpp"
-#include "logging_system/spdlogger.hpp"
+#include "core/engine_component.hpp"
+#include "core/logging_system/spdlogger.hpp"
 
 namespace focus
 {

@@ -5,8 +5,8 @@
 #include <functional>
 #include <set>
 
-#include "event_system/event_handler.hpp"
-#include "logging_system/logger.hpp"
+#include "core/event_system/event_handler.hpp"
+#include "core/logging_system/logger.hpp"
 
 namespace focus
 {

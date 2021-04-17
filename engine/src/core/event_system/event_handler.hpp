@@ -6,7 +6,7 @@
 #include <vector>
 #include <functional>
 
-#include "event.hpp"
+#include "core/event_system/event.hpp"
 
 namespace focus
 {

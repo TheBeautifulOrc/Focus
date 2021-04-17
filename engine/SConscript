@@ -9,6 +9,16 @@ from glob import glob
 
 Import('env')
 
-coreSource = glob(pathname='src/core/**/*.cpp', recursive=True)
+# Configure 'core.hpp'
+core_header = glob(pathname='src/core/**/*.hpp')
+core_header = [elem[elem.find('/')+1:] for elem in core_header]
 
-core = env.SharedLibrary('./shared/core', coreSource, LIBS=['glfw', 'fmt', 'spdlog'])
+with open('include/engine/core.hpp', 'w') as core_hpp:
+	core_hpp.write('#pragma once\n\n')
+	for elem in core_header:
+		core_hpp.write('#include "' + elem + '"\n')
+
+# Build core
+core_source = glob(pathname='src/core/**/*.cpp', recursive=True)
+
+core = env.SharedLibrary('./shared/core', core_source, LIBS=['glfw', 'fmt', 'spdlog'])
