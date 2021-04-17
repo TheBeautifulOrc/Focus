@@ -7,7 +7,6 @@
 
 #include "event_system/event_handler.hpp"
 #include "logging_system/logger.hpp"
-#include "logging_system/spdlogger.hpp"
 
 namespace focus
 {
@@ -78,7 +77,7 @@ namespace focus
 			std::shared_ptr<ILogger> _logger
 		);
 
-		~EngineComponent() = default;
+		virtual ~EngineComponent() = default;
 	};
 
 } // namespace focus

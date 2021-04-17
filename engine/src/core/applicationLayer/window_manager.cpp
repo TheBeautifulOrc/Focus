@@ -8,7 +8,10 @@
 
 namespace focus
 {
-	WindowManager::WindowManager(std::string _name) : EngineComponent(_name)
+	WindowManager::WindowManager(
+		std::string _name,
+		std::shared_ptr<ILogger> _logger
+	) : EngineComponent(_name, _logger)
 	{
 		if (!glfwInit())
 		{

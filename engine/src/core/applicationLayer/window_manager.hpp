@@ -20,8 +20,12 @@ namespace focus
 		 * WindowManager constructor.
 		 *
 		 * @param _name Name of this object.
+		 * @param _logger Logger this object should use.
 		 */
-		WindowManager(std::string _name="WindowManager");
+		WindowManager(
+			std::string _name,
+			std::shared_ptr<ILogger> _logger
+		);
 		~WindowManager();
 
 	private:

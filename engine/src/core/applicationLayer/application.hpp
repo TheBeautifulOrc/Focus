@@ -2,6 +2,7 @@
 
 #include <memory>
 #include "../engine_component.hpp"
+#include "../logging_system/spdlogger.hpp"
 
 namespace focus
 {
@@ -20,25 +21,14 @@ namespace focus
 		 *
 		 * @param _name Name of this object. Defaults to "app".
 		 * @param _logger Logger instance that this object shall use for its logging. If unspecified a new (default) instance of Logger will be created.
-		 * @param _window_manager WindowManager instance, owned by this object, that will be used for generating application windows. If unspecified a new (default) instance of WindowManager will be created.
 		 */
 		Application(
-			std::string _name = "app",
-			std::shared_ptr<ILogger> _logger = std::make_shared<SPDLogger>(),
-			std::unique_ptr<WindowManager> _window_manager = std::make_unique<WindowManager>()
+			std::string _name,
+			std::shared_ptr<ILogger> _logger = std::make_shared<SPDLogger>()
 		);
 		~Application() = default;
 
-		/**
-		 * @brief Returns WindowManager instance of this object.
-		 *
-		 * @return WindowManager instance of this object.
-		 */
-		auto get_window_manager() const -> const WindowManager&;
-
 	protected:
-		// WindowManager instance that is used for creating and managing application windows.
-		std::unique_ptr<WindowManager> window_manager;
 	};
 
 } // namespace focus

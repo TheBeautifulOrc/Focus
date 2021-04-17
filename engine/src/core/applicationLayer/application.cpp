@@ -4,7 +4,11 @@
 
 namespace focus
 {
-	Application::Application(std::string _name, std::shared_ptr<ILogger> _logger, std::unique_ptr<WindowManager> _window_manager) : EngineComponent(_name, _logger)
+	Application::Application(
+		std::string _name,
+		std::unique_ptr<WindowManager> _window_manager,
+		std::shared_ptr<ILogger> _logger
+	) : EngineComponent(_name, _logger)
 	{
 		window_manager = std::move(_window_manager);
 	}
