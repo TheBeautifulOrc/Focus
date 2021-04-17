@@ -1,7 +1,7 @@
-#include "window.hpp"
+#include "window_manager.hpp"
 
-#include "../logging_system/logger.hpp"
-#include "../logging_system/spdlogger.hpp"
+#include "logging_system/logger.hpp"
+#include "logging_system/spdlogger.hpp"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
