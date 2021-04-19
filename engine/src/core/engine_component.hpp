@@ -22,30 +22,30 @@ namespace focus
 		/**
 		 * @brief Returns logger of this object.
 		 *
-		 * @return Constant reference of this objects logger.
+		 * @return Logger of this object. Can be taken partial ownership of.
 		 */
-		inline auto get_logger() -> std::shared_ptr<ILogger> { return logger; }
+		inline auto get_logger() const -> std::shared_ptr<ILogger> { return logger; }
 
 		/**
 		 * @brief Logs info-level data.
 		 *
 		 * @param msg Message that shall be logged.
 		 */
-		inline void info(const std::string& msg) { logger->info(name, msg); }
+		inline void info(const std::string& msg) const { logger->info(name, msg); }
 
 		/**
 		 * @brief Logs warning-level data.
 		 *
 		 * @param msg Message that shall be logged.
 		 */
-		inline void warning(const std::string& msg) { logger->warning(name, msg); }
+		inline void warning(const std::string& msg) const { logger->warning(name, msg); }
 
 		/**
 		 * @brief Logs error-level data.
 		 *
 		 * @param msg Message that shall be logged.
 		 */
-		inline void error(const std::string& msg) { logger->error(name, msg); }
+		inline void error(const std::string& msg) const { logger->error(name, msg); }
 
 		/**
 		 * @brief Returns name of this object.
@@ -55,15 +55,20 @@ namespace focus
 		inline auto get_name() const -> const std::string& { return name; }
 
 		/**
-		 * @brief Add another EngineComponent as subcomponent.
+		 * @brief Add another engine component as subcomponent.
 		 *
 		 * This object has exclusive ownership over its subcomponents. A pointer to the newly added subcomponent is returned for convenience.
 		 *
-		 * @param new_comp EngineComponent to take ownership of.
+		 * @param new_comp Engine component to take ownership of.
 		 *
 		 * @return Pointer to the newly added subcomponent.
 		 */
-		auto add_subcomponent(std::unique_ptr<EngineComponent> new_comp) -> EngineComponent*;
+		inline auto add_subcomponent(std::unique_ptr<EngineComponent> new_comp) -> const std::unique_ptr<EngineComponent>&
+		{
+			auto key = new_comp->get_name();
+			auto inserted = subcomponents.insert(std::make_pair(key, std::move(new_comp)));
+			return get_subcomponent(key);
+		}
 
 		/**
 		 * @brief Returns subcomponent by name.
@@ -72,10 +77,10 @@ namespace focus
 		 *
 		 * @return Pointer to the requested subcomponent.
 		 */
-		inline auto get_subcomponent(const std::string& comp_name) -> EngineComponent* { return subcomponents.at(comp_name).get(); }
+		inline auto get_subcomponent(const std::string& comp_name) const -> const std::unique_ptr<EngineComponent>& { return subcomponents.at(comp_name); }
 
 		/**
-		 * @brief Removes an EngineComponent from the list of subcomponents.
+		 * @brief Removes an engine component from the list of subcomponents.
 		 *
 		 * The removed subcomponent will be destroyed.
 		 *
@@ -84,7 +89,7 @@ namespace focus
 		inline void remove_subcomponent(const std::string& comp_name) { subcomponents.erase(comp_name); }
 
 		/**
-		 * @brief Removes an EngineComponent from the list of subcomponents and returns it.
+		 * @brief Removes an engine component from the list of subcomponents and returns it.
 		 *
 		 * Caller is taking ownership of the removed subcomponent.
 		 *
