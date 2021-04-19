@@ -7,6 +7,6 @@ namespace focus
 	Application::Application(
 		std::string _name,
 		std::shared_ptr<ILogger> _logger
-	) : EngineComponent(_name, _logger) {};
+	) : IEngineComponent(_name, _logger) {};
 
 } // namespace focus

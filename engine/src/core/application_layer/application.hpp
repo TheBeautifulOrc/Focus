@@ -13,7 +13,7 @@ namespace focus
 	 *
 	 * This class serves as a starting point for all applications (games and other) that shall be created with the help of the Focus Engine.
 	 */
-	class Application : public EngineComponent
+	class Application : public IEngineComponent
 	{
 	public:
 		/**

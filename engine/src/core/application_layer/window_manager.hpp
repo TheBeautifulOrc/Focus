@@ -13,7 +13,7 @@ namespace focus
 	 *
 	 * This class is meant as an abstraction level and interface between the Focus Engine and any external window library it may use. At the moment only GLFW is supported but this may change in the future. Each application written with the Focus Engine typically has one WindowManager object associated with it.
 	 */
-	class WindowManager : public EngineComponent
+	class WindowManager : public IEngineComponent
 	{
 	public:
 		/**
