@@ -32,7 +32,7 @@ namespace focus
 		handler->event_targets.erase(this);
 	}
 
-	void IEventHandler::dispatch_event(EventPtr event)
+	void IEventHandler::dispatch_event(std::shared_ptr<const IEvent> event)
 	{
 		if (event->get_priority() < 255)
 		{

@@ -18,7 +18,7 @@ namespace focus
 		 *
 		 * @return The priority of this event. Events with higher priorities will be handled earlier. (0 - lowest; 254 - highest, non interrupt; 255 - interrupt)
 		 */
-		inline virtual auto get_priority() const -> uint8_t { return priority; }
+		inline auto get_priority() const -> uint8_t { return priority; }
 
 	protected:
 		std::string name;

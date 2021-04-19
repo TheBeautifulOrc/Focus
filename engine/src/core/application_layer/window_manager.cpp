@@ -14,7 +14,7 @@ namespace focus
 	{
 		if (!glfwInit())
 		{
-			logger->error(name, "GLFW initialization failed");
+			get_logger()->error(get_name(), "GLFW initialization failed");
 		}
 		glfwSetErrorCallback(_glfw_error_callback);
 	}

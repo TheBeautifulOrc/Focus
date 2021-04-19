@@ -17,14 +17,15 @@ namespace focus
 	 */
 	class IEventHandler
 	{
-		using EventPtr = std::shared_ptr<const IEvent>;
-		using EventQueue = std::priority_queue<EventPtr, std::vector<EventPtr>, std::function<bool(EventPtr&, EventPtr&)>>;
+		using EventComperator = std::function<bool(const std::shared_ptr<const IEvent>&, const std::shared_ptr<const IEvent>&)>;
+		using EventQueue = std::priority_queue<std::shared_ptr<const IEvent>, std::vector<std::shared_ptr<const IEvent>>, EventComperator>;
 
 	protected:
 		IEventHandler() = default;
-		virtual ~IEventHandler();
 
 	public:
+		virtual ~IEventHandler();
+
 		/**
 		 * @brief Event callback function.
 		 *
@@ -32,7 +33,7 @@ namespace focus
 		 *
 		 * @param event Event that this object should react to.
 		 */
-		virtual inline void process_event(EventPtr event) {};
+		virtual inline void process_event(std::shared_ptr<const IEvent> event) {};
 
 		/**
 		 * @brief Invokes 'process_event' fuction on event at the top of the event queue.
@@ -44,7 +45,7 @@ namespace focus
 		 *
 		 * @param event Event to dispatch to the targets.
 		 */
-		virtual void dispatch_event(EventPtr event);
+		virtual void dispatch_event(std::shared_ptr<const IEvent> event);
 
 		/**
 		 * @brief Subscribe to the events of another EventHandler.
@@ -77,7 +78,8 @@ namespace focus
 		/* Event queueing: */
 
 		// Function to sort queued events by priority.
-		std::function<bool(EventPtr&, EventPtr&)> sort_events_by_priority = [](EventPtr& lhs, EventPtr& rhs)
+		EventComperator sort_events_by_priority =
+			[](const std::shared_ptr<const IEvent>& lhs, const std::shared_ptr<const IEvent>& rhs)
 		{
 			return lhs->get_priority() < rhs->get_priority();
 		};
