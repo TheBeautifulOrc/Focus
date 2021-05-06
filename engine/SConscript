@@ -9,22 +9,32 @@ from glob import glob
 
 Import('env')
 
-modules = [elem for elem in Dir('src').children() if elem.isdir()]
+# Engine source code location
+source_path = 'src'
+source_dir = Dir(source_path)
+# Engine header location
+include_path = 'include/engine'
+# Engine shared library location
+shared_path = 'shared'
 
+# Top-level folders are interpreted as engine modules
+modules = [Dir(elem) for elem in source_dir.children() if elem.isdir()]
 
-
-# # Configure 'core.hpp'
-# core_header_path = Dir('src/core')
-# core_header = core_header_path.glob('*')
-# print(dir(core_header[0].attributes))
-# # core_header = [str(elem) for elem in core_header]
-
-# with open('include/engine/core.hpp', 'w') as core_hpp:
-# 	core_hpp.write('#pragma once\n\n')
-# 	for elem in core_header:
-# 		core_hpp.write('#include "' + elem + '"\n')
-
-# # Build core
-# core_source = glob(pathname='src/core/**/*.cpp', recursive=True)
-
-# core = env.SharedLibrary('./shared/core', core_source, LIBS=['glfw', 'fmt', 'spdlog'])
+# For each module...
+for module in modules:
+	# Find all subdirectories
+	dirs = [module]
+	for d in dirs:
+		dirs.extend([Dir(elem) for elem in d.children() if elem.isdir()])
+	# Create include-header
+	incl_header_path = join(include_path, module.name + ".hpp")
+	with open(incl_header_path, 'w') as incl_header:
+		incl_header.write("#pragma once\n\n")
+		module_headers = []
+		[module_headers.extend(d.glob('*.hpp')) for d in dirs]
+		incl_header.writelines(["#include \"" + str(h).removeprefix("src/") + "\"\n" for h in module_headers])
+	# Compile module into shared library
+	module_source = []
+	[module_source.extend(d.glob('*.cpp')) for d in dirs]
+	module_source = [str(s) for s in module_source]
+	build = env.SharedLibrary(join(shared_path, module.name), module_source, LIBS=['glfw', 'fmt', 'spdlog'])
