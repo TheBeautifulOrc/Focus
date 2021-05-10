@@ -6,8 +6,6 @@
 
 namespace focus
 {
-	class WindowManager;
-
 	/**
 	 * @brief Base class for applications created with the Focus Engine.
 	 *

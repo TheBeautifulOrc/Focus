@@ -1,7 +1,5 @@
 #include "application.hpp"
 
-#include "window/window_manager.hpp"
-
 namespace focus
 {
 	Application::Application(

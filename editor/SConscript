@@ -1,0 +1,11 @@
+###
+# Focus engine editor
+###
+
+#pylint: skip-file
+
+from os.path import join
+
+Import('env')
+
+env.Program('./bin/FocusEditor', ['main.cpp'], LIBS=['core'])
