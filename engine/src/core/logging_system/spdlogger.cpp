@@ -8,7 +8,7 @@
 #include "spdlog/sinks/ostream_sink.h"
 namespace focus
 {
-	SPDLogger::SPDLogger(const SPDLogger::Type types, std::string log_file_name, const ulong& rotation_file_size, const uint& n_rotation_files)
+	LoggerSPD::LoggerSPD(const LoggerSPD::Type types, std::string log_file_name, const ulong& rotation_file_size, const uint& n_rotation_files)
 	{
 		// Create a spdlog::sink for each requested logger type
 		std::vector<std::shared_ptr<spdlog::sinks::sink>> requested_sinks;
@@ -38,32 +38,32 @@ namespace focus
 		spd_logger->set_pattern("[%H:%M:%S] [%l] %v");
 	}
 
-	void SPDLogger::anonymous_info(const std::string& msg) const
+	void LoggerSPD::anonymous_info(const std::string& msg) const
 	{
 		spd_logger->info(msg);
 	}
 
-	void SPDLogger::anonymous_warning(const std::string& msg) const
+	void LoggerSPD::anonymous_warning(const std::string& msg) const
 	{
 		spd_logger->warn(msg);
 	}
 
-	void SPDLogger::anonymous_error(const std::string& msg) const
+	void LoggerSPD::anonymous_error(const std::string& msg) const
 	{
 		spd_logger->error(msg);
 	}
 
-	void SPDLogger::info(const std::string& caller_name, const std::string& msg) const
+	void LoggerSPD::info(const std::string& caller_name, const std::string& msg) const
 	{
 		spd_logger->info("[" + caller_name + "]:\t" + msg);
 	}
 
-	void SPDLogger::warning(const std::string& caller_name, const std::string& msg) const
+	void LoggerSPD::warning(const std::string& caller_name, const std::string& msg) const
 	{
 		spd_logger->warn("[" + caller_name + "]:\t" + msg);
 	}
 
-	void SPDLogger::error(const std::string& caller_name, const std::string& msg) const
+	void LoggerSPD::error(const std::string& caller_name, const std::string& msg) const
 	{
 		spd_logger->error("[" + caller_name + "]:\t" + msg);
 	}

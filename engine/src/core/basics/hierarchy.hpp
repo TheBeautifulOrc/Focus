@@ -6,6 +6,11 @@
 
 namespace focus
 {
+	/**
+	 * @brief Interface defining behavior for all hierarchaical classes within the Focus Engine.
+	 *
+	 * This class defines a set of functionality that all hierarchaical types within the Focus Engine must possess. This includes a field to store all subcomponents owned by each element (accessible by their names), and methods add, remove or query subcomponents.
+	 */
 	template<typename T>
 	class IHierarchyElement
 	{

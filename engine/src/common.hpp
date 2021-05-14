@@ -3,6 +3,7 @@
 #include <string>
 
 #include "core/logging_system/spdlogger.hpp"
+#include "core/application_layer/window_system/window_glfw.hpp"
 
 namespace focus
 {
@@ -38,7 +39,9 @@ namespace focus
 		// Current version number of this engine
 		const VersionNumber engine_version(0, 1, 0);
 		// Default logger
-		using DefaultLogger = SPDLogger;
+		using DefaultLogger = LoggerSPD;
+		// Default window
+		using DefaultWindow = WindowGLFW;
 
 	} // namespace constants
 

@@ -4,9 +4,18 @@
 
 namespace focus
 {
+	/**
+	 * @brief Implementation of a window for the Focus Engine using GLFW.
+	 */
 	class WindowGLFW : public IWindow
 	{
 	public:
+		/**
+		 * @brief GLFW-window constructor.
+		 *
+		 * @param _name Name of this window.
+		 * @param _logger Logger that will be used by this window.
+		 */
 		WindowGLFW(std::string _name, std::shared_ptr<ILogger> _logger);
 		~WindowGLFW();
 

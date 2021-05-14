@@ -53,4 +53,5 @@ namespace focus
 		vk::Instance instance;
 		std::map<std::string, vk::PhysicalDevice> physical_devices;
 	};
+
 } // namespace focus

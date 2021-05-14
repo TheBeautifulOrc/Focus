@@ -19,9 +19,9 @@ namespace focus
 		/**
 		 * @brief Application constructor.
 		 *
-		 * @param _name Name of this object.
+		 * @param _name Name of this application.
 		 * @param _version Version number of this application.
-		 * @param _logger Logger instance that this object shall use for its logging. If unspecified a new (default) instance of Logger will be created.
+		 * @param _logger Logger instance that this application shall use for its logging. If unspecified a new (default) instance of Logger will be created.
 		 */
 		Application(
 			std::string _name,

@@ -13,11 +13,9 @@
 namespace focus
 {
 	/**
-	 * @brief Wrapper class for spdlog logging library.
-	 *
-	 * This class serves as a wrapper between the focus engine and spdlog.
+	 * @brief Logger implementation using spdlog library.
 	 */
-	class SPDLogger : public ILogger
+	class LoggerSPD : public ILogger
 	{
 	public:
 		/**
@@ -35,18 +33,18 @@ namespace focus
 		/**
 		 * Logger constructor.
 		 *
-		 * @param types SPDLogger::Type flags that indicate on which channels should be logged (multiple channels may be selected).
+		 * @param types LoggerSPD::Type flags that indicate on which channels should be logged (multiple channels may be selected).
 		 * @param log_file_name Name of the log file that will be created (only relevant for simple file logging or rotation logging).
 		 * @param rotation_file_size Maximum file size of single log file during rotation logging (thus only relevant for rotation logging).
 		 * @param n_rotation_files Maximum number of rotating log files (only relevant for rotation logging).
 		 */
-		SPDLogger(
-			const SPDLogger::Type types=Type::Console,
+		LoggerSPD(
+			const LoggerSPD::Type types=Type::Console,
 			std::string log_file_name="log",
 			const ulong& rotation_file_size=1024*1024*5,
 			const uint& n_rotation_files=3
 		);
-		~SPDLogger() = default;
+		~LoggerSPD() = default;
 
 		/**
 		 * Logs info-level data without specifying the caller.
