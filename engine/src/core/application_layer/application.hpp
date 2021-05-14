@@ -26,7 +26,7 @@ namespace focus
 		Application(
 			std::string _name,
 			VersionNumber _version,
-			std::shared_ptr<ILogger> _logger = std::make_shared<constants::DefaultLogger>()
+			std::shared_ptr<ILogger> _logger = std::make_shared<LoggerSPD>()
 		);
 		~Application() = default;
 

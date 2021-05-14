@@ -2,9 +2,6 @@
 
 #include <string>
 
-#include "core/logging_system/spdlogger.hpp"
-#include "core/application_layer/window_system/window_glfw.hpp"
-
 namespace focus
 {
 	/**
@@ -38,10 +35,6 @@ namespace focus
 		const std::string engine_name = "Focus Engine";
 		// Current version number of this engine
 		const VersionNumber engine_version(0, 1, 0);
-		// Default logger
-		using DefaultLogger = LoggerSPD;
-		// Default window
-		using DefaultWindow = WindowGLFW;
 
 	} // namespace constants
 

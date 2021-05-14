@@ -6,7 +6,6 @@
 #include <set>
 #include <map>
 
-#include "common.hpp"
 #include "core/event_system/event_handler.hpp"
 #include "core/logging_system/logger.hpp"
 #include "core/basics/hierarchy.hpp"
