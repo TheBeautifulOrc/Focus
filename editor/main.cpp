@@ -12,8 +12,8 @@ void print_type(const T& thing)
 
 int main(int argc, char** argv)
 {
-	Application app("Focus Editor");
-	app.info("Editor ready");
+	Application app("Focus Editor", VersionNumber(0,1,0));
+	RendererVulkan renderer("Vulkan Renderer", app.get_logger(), &app);
 
 	return 0;
 }

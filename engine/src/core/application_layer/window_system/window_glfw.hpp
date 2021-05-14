@@ -8,7 +8,7 @@ namespace focus
 	{
 	public:
 		WindowGLFW(std::string _name, std::shared_ptr<ILogger> _logger);
-		~WindowGLFW() = default;
+		~WindowGLFW();
 
 	private:
 		/**
@@ -20,5 +20,11 @@ namespace focus
 		 * @param error_description GLFW error message.
 		 */
 		static void _error_callback(int error, const char* error_description);
+
+		static size_t window_counter;
+		static std::shared_ptr<ILogger> static_logger;
 	};
+
+	size_t WindowGLFW::window_counter;
+	std::shared_ptr<ILogger> WindowGLFW::static_logger;
 } // namespace focus

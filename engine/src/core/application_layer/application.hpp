@@ -1,6 +1,8 @@
 #pragma once
 
 #include <memory>
+
+#include "common.hpp"
 #include "core/engine_component.hpp"
 #include "core/logging_system/spdlogger.hpp"
 
@@ -17,16 +19,26 @@ namespace focus
 		/**
 		 * @brief Application constructor.
 		 *
-		 * @param _name Name of this object. Defaults to "app".
+		 * @param _name Name of this object.
+		 * @param _version Version number of this application.
 		 * @param _logger Logger instance that this object shall use for its logging. If unspecified a new (default) instance of Logger will be created.
 		 */
 		Application(
 			std::string _name,
-			std::shared_ptr<ILogger> _logger = std::make_shared<SPDLogger>()
+			VersionNumber _version,
+			std::shared_ptr<ILogger> _logger = std::make_shared<constants::DefaultLogger>()
 		);
 		~Application() = default;
 
-	protected:
+		/**
+		 * @brief Version number getter.
+		 *
+		 * @return Version number of this application.
+		 */
+		inline auto get_version() const -> const VersionNumber& { return version; }
+
+	private:
+		const VersionNumber version;
 	};
 
 } // namespace focus

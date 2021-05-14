@@ -8,5 +8,7 @@
 #include "core/event_system/event_handler.hpp"
 #include "core/logging_system/logger.hpp"
 #include "core/logging_system/spdlogger.hpp"
+#include "core/renderer/renderer.hpp"
 #include "core/application_layer/window_system/window.hpp"
 #include "core/application_layer/window_system/window_glfw.hpp"
+#include "core/renderer/vulkan/renderer_vulkan.hpp"

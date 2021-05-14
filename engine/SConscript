@@ -37,4 +37,4 @@ for module in modules:
 	module_source = []
 	[module_source.extend(d.glob('*.cpp')) for d in dirs]
 	module_source = [str(s) for s in module_source]
-	build = env.SharedLibrary(join(shared_path, module.name), module_source, LIBS=['glfw', 'fmt', 'spdlog'])
+	build = env.SharedLibrary(join(shared_path, module.name), module_source, LIBS=['glfw', 'fmt', 'spdlog', 'vulkan'])
