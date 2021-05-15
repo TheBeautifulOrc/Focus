@@ -12,6 +12,13 @@
 
 namespace focus
 {
+	class IEngineComponent;
+	template<typename C>
+	concept EngineComponentSubtype = requires(C comp)
+	{
+		std::is_base_of<IEngineComponent, C>();
+	};
+
 	/**
 	 * @brief Basic component of the Focus Engine.
 	 *
@@ -32,21 +39,21 @@ namespace focus
 		 *
 		 * @param msg Message that shall be logged.
 		 */
-		inline void info(const std::string& msg) const { logger->info(name, msg); }
+		inline void info(const std::string& msg) const override { logger->info(name, msg); }
 
 		/**
 		 * @brief Logs warning-level data.
 		 *
 		 * @param msg Message that shall be logged.
 		 */
-		inline void warning(const std::string& msg) const { logger->warning(name, msg); }
+		inline void warning(const std::string& msg) const override { logger->warning(name, msg); }
 
 		/**
 		 * @brief Logs error-level data.
 		 *
 		 * @param msg Message that shall be logged.
 		 */
-		inline void error(const std::string& msg) const { logger->error(name, msg); }
+		inline void error(const std::string& msg) const override { logger->error(name, msg); }
 
 		/**
 		 * @brief Returns name of this object.
@@ -54,6 +61,20 @@ namespace focus
 		 * @return Name of this object.
 		 */
 		inline auto get_name() const -> const std::string& { return name; }
+
+		/**
+		 * @brief Template specialization for adding subcomponents based on this class.
+		 *
+		 * @param new_comp New component to add
+		 */
+		template<EngineComponentSubtype C>
+		inline auto add_subcomponent(std::unique_ptr<C> new_comp) -> C*
+		{
+			std::unique_ptr<IEngineComponent> cast_comp = std::move(new_comp);
+			auto key = cast_comp->get_name();
+			subcomponents.insert({ key, std::move(cast_comp) });
+			return get_subcomponent<C>(key);
+		}
 
 	private:
 		// Name of this object.

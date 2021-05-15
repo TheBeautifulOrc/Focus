@@ -26,7 +26,7 @@ for folder in folders:
 # Environment settings
 env = Environment(
 	CC='g++',
-	CCFLAGS=['-std=c++17', '-g'],
+	CCFLAGS=['-std=c++20', '-g', '-fdiagnostics-color=always'],
 	CPPPATH=['#engine/include', '#engine/src'],
 	LIBPATH=['#engine/shared']
 )

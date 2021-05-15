@@ -49,6 +49,8 @@ namespace focus
 		 */
 		auto get_physical_device_list() const -> std::vector<std::string>;
 
+		void create_logical_device();
+
 	private:
 		vk::Instance instance;
 		std::map<std::string, vk::PhysicalDevice> physical_devices;

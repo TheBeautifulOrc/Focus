@@ -4,6 +4,8 @@
 #include <string>
 #include <memory>
 
+#include "core/basics/rtti.hpp"
+
 namespace focus
 {
 	/**
@@ -29,11 +31,13 @@ namespace focus
 		 *
 		 * @return Pointer to the newly added subcomponent.
 		 */
-		inline auto add_subcomponent(std::unique_ptr<T> new_comp) -> const std::unique_ptr<T>&
+		template<typename C>
+		inline auto add_subcomponent(std::unique_ptr<C> new_comp, std::string key) -> C*
 		{
-			auto key = new_comp->get_name();
-			auto inserted = subcomponents.insert(std::make_pair(key, std::move(new_comp)));
-			return get_subcomponent(key);
+			static_assert(std::is_base_of<T, C>(), "Subcomponent is of unfitting type.");
+			std::unique_ptr<T> cast_comp = std::move(new_comp);
+			subcomponents.insert({key, std::move(cast_comp)});
+			return get_subcomponent<C>(key);
 		}
 
 		/**
@@ -43,7 +47,21 @@ namespace focus
 		 *
 		 * @return Pointer to the requested subcomponent.
 		 */
-		inline auto get_subcomponent(const std::string& comp_name) const -> const std::unique_ptr<T>& { return subcomponents.at(comp_name); }
+		template<typename C>
+		inline auto get_subcomponent(const std::string& comp_name) const -> C*
+		{
+			const auto req_component = subcomponents.at(comp_name).get();
+			if (!is_type<C>(req_component))
+			{
+				error("Engine component not of requested type.");
+				return nullptr;
+			}
+			return dynamic_cast<C*>(req_component);
+		}
+
+		virtual void info(const std::string& msg) const = 0;
+		virtual void warning(const std::string& msg) const = 0;
+		virtual void error(const std::string& msg) const = 0;
 
 		/**
 		 * @brief Removes an engine component from the list of subcomponents.
@@ -70,7 +88,7 @@ namespace focus
 			return std::move(ret_comp);
 		}
 
-	private:
+	protected:
 		// Subcomponents owned by this element
 		std::map<const std::string, std::unique_ptr<T>> subcomponents;
 	};

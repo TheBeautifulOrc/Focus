@@ -9,6 +9,6 @@ namespace focus
 	 * @param ptr Pointer whose contents will be examined.
 	 */
 	template<typename T, typename U>
-	inline auto is_type(U* ptr) -> bool { return &typeid(*ptr) == &typeid(T); }
+	constexpr inline auto is_type(U* ptr) -> bool { return &typeid(*ptr) == &typeid(T); }
 
 } // namespace focus
