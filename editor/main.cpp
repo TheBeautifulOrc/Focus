@@ -13,7 +13,7 @@ void print_type(const T& thing)
 int main(int argc, char** argv)
 {
 	Application app("Focus Editor", VersionNumber(0,1,0));
-	auto p_renderer = app.add_subcomponent(std::make_unique<RendererVulkan>("Vulkan Renderer", app.get_logger(), &app));
+	auto renderer = app.add_subcomponent(std::make_unique<RendererVulkan>("Vulkan Renderer", app.get_logger(), &app));
 
 	return 0;
 }

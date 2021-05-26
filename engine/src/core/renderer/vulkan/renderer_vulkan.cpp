@@ -58,12 +58,7 @@ namespace focus
 
 				// Retrieve device name
 				auto& device_name_raw = dev_props.deviceName;
-				size_t char_counter = 0;
-				while (device_name_raw.at(char_counter) != 0)
-				{
-					++char_counter;
-				}
-				std::string device_name(device_name_raw.begin(), device_name_raw.begin()+char_counter);
+				auto device_name = extract_vulkan_string(device_name_raw);
 
 				// Insert into map of all present devices
 				// (add number to name in case multiple devices with the same name exist)
@@ -89,7 +84,6 @@ namespace focus
 		}
 		return output;
 	}
-
 
 
 } // namespace focus

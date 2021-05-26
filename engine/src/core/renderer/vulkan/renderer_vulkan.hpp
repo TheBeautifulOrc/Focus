@@ -49,11 +49,21 @@ namespace focus
 		 */
 		auto get_physical_device_list() const -> std::vector<std::string>;
 
-		void create_logical_device();
-
 	private:
 		vk::Instance instance;
 		std::map<std::string, vk::PhysicalDevice> physical_devices;
+
+		template<size_t size>
+		inline auto extract_vulkan_string(vk::ArrayWrapper1D<char, size> vk_string) -> std::string
+		{
+			size_t char_counter = 0;
+			while (vk_string.at(char_counter) != 0)
+			{
+				++char_counter;
+			}
+			std::string result_string(vk_string.begin(), vk_string.begin()+char_counter);
+			return result_string;
+		}
 	};
 
 } // namespace focus
