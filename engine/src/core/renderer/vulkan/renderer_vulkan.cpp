@@ -38,11 +38,7 @@ namespace focus
 			// Vulkan instance info
 			const vk::InstanceCreateInfo instance_info({}, &app_info, 0U, nullptr, 0U, nullptr);
 
-			auto res = vk::createInstance(&instance_info, nullptr, &instance.get());
-			if (res != vk::Result::eSuccess)
-			{
-				error("Unable to create Vulkan instance.");
-			}
+			instance = vk::createInstanceUnique(instance_info);
 		};
 		create_instance();
 
