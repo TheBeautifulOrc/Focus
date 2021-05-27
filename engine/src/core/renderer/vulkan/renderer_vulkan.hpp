@@ -33,7 +33,7 @@ namespace focus
 		 *
 		 * @return Underlying Vulkan instance of this renderer.
 		 */
-		inline auto get_vulkan_instance() const -> const vk::Instance& { return instance; }
+		inline auto get_vulkan_instance() const -> const vk::Instance& { return instance.get(); }
 
 		/**
 		 * @brief Physical device getter.
@@ -50,7 +50,7 @@ namespace focus
 		auto get_physical_device_list() const -> std::vector<std::string>;
 
 	private:
-		vk::Instance instance;
+		vk::UniqueInstance instance;
 		std::map<std::string, vk::PhysicalDevice> physical_devices;
 
 		template<size_t size>

@@ -38,7 +38,7 @@ namespace focus
 			// Vulkan instance info
 			const vk::InstanceCreateInfo instance_info({}, &app_info, 0U, nullptr, 0U, nullptr);
 
-			auto res = vk::createInstance(&instance_info, nullptr, &instance);
+			auto res = vk::createInstance(&instance_info, nullptr, &instance.get());
 			if (res != vk::Result::eSuccess)
 			{
 				error("Unable to create Vulkan instance.");
@@ -49,7 +49,7 @@ namespace focus
 		// Query all physical devices
 		auto query_physical_devices = [&]()
 		{
-			auto physical_devs = instance.enumeratePhysicalDevices();	// List physical devices
+			auto physical_devs = instance.get().enumeratePhysicalDevices();	// List physical devices
 
 			// Add each device individually
 			for (auto&& device : physical_devs)
@@ -73,6 +73,8 @@ namespace focus
 			}
 		};
 		query_physical_devices();
+
+
 	}
 
 	auto RendererVulkan::get_physical_device_list() const -> std::vector<std::string>
