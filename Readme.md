@@ -17,11 +17,11 @@ Unlike many other game engines the Focus Engine and all of its source code are r
 ### 2. Aimed at engineers and programmers
 Many game engines put a strong emphasis on accessability for people who are not comfortable with writing complex code or maintaining large code bases. Instead they offer heavy abstraction layers that allow non-programmers to create simple games without writing too much (or in extreme cases any) source code.
 
-However this oversimplification also leads to unnecessary restrictions of creative expression when designing the architecture of more sophisticated games.
+However this oversimplification leads to unnecessary restrictions of creative expression when designing the architecture of more sophisticated games.
 
 Because of that the Focus Engine is setup with as little boilerplate as possible, in order to fit nicely in every game developers workflow.
 
-This also means that the Focus Engine does not enforce patterns like the Entity-Component-System or other top-down-workflows, to give you more freedom of expressing his thoughts through code, without too many engine-specific restrictions.
+This also means that the Focus Engine does not enforce patterns like the Entity-Component-System or other top-down-workflows, to give you more freedom of expressing your thoughts through code, without too many engine-specific restrictions.
 
 ### 3. C++ all the way!
 This point strongly coincides with the aforementioned one. C++ is often used to create game engines, due to its efficient performance and mature set of features. However when it comes to writing actual games on top of these engines, most game engines encourage developers to use alternative languages such as C# or scripting languages.
