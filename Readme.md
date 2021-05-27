@@ -33,7 +33,7 @@ The often quoted paradigm of *"sticking to an easy language and only bothering w
 Finally supporting C++ as the sole programming language for the Focus Engine leads to a higher-quality C++-API, which also grants developers direct access to all its core features and inner workings. It is also obvious that a custom scripting language will never reach the maturity, feature-density and community support the C++ programming language already has.
 
 ### 4. Cross-platform
-The Focus Engine, its editor and of course the games created with them are meant to run on Linux, MacOS and Windows, so that users on every of these major platforms may benefit from this project.
+The Focus Engine, its editor and of course the games created with them are meant to run on Linux and Windows alike, so that users on both of these major platforms may benefit from this project.
 
 ### 5. Powerful graphics
 The Focus Engine utilizes the Vulkan graphics API to render images. This low-level API grants fine control and efficient usage of the host systems GPU.
