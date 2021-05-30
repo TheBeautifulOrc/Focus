@@ -24,7 +24,7 @@ namespace focus
 		 * @param _logger Logger instance that this application shall use for its logging. If unspecified a new (default) instance of Logger will be created.
 		 */
 		Application(
-			std::string _name,
+			const std::string& _name,
 			VersionNumber _version,
 			std::shared_ptr<ILogger> _logger = std::make_shared<LoggerSPD>()
 		);

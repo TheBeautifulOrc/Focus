@@ -25,7 +25,7 @@ namespace focus
 		 * @param _logger Logger instance that this object shall use for its logging.
 		 * @param _application The application this renderer is goint to be part of.
 		 */
-		RendererVulkan(std::string _name, std::shared_ptr<ILogger> _logger, const Application* _application);
+		RendererVulkan(std::string _name, const Application* _application, std::shared_ptr<ILogger> _logger);
 		~RendererVulkan() = default;
 
 		/**

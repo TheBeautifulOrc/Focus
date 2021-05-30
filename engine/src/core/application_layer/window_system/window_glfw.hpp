@@ -1,6 +1,9 @@
 #pragma once
 
+#include <GLFW/glfw3.h>
+
 #include "core/application_layer/window_system/window.hpp"
+#include "core/logging_system/spdlogger.hpp"
 
 namespace focus
 {
@@ -14,10 +17,20 @@ namespace focus
 		 * @brief GLFW-window constructor.
 		 *
 		 * @param _name Name of this window.
+		 * @param _titel Displayed title of the window.
+		 * @param _resolution Resolution of the window in pixels (width * height).
 		 * @param _logger Logger that will be used by this window.
 		 */
-		WindowGLFW(std::string _name, std::shared_ptr<ILogger> _logger);
+		WindowGLFW(
+			const std::string& _name,
+			const std::string& _title,
+			glm::u16vec2 _resolution,
+			std::shared_ptr<ILogger> _logger
+		);
 		~WindowGLFW();
+
+		void set_title(const std::string& title) override {}
+		void set_resolution(glm::u16vec2 resolution) override {};
 
 	private:
 		/**
@@ -32,6 +45,8 @@ namespace focus
 
 		static size_t window_counter;
 		static std::shared_ptr<ILogger> static_logger;
+
+		GLFWwindow* glfw_window_handle;
 	};
 
 	size_t WindowGLFW::window_counter;

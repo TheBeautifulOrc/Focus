@@ -7,9 +7,10 @@
 
 namespace focus
 {
-	WindowGLFW::WindowGLFW(std::string _name, std::shared_ptr<ILogger> _logger) :
-		IWindow(_name, _logger)
+	WindowGLFW::WindowGLFW(const std::string& _name, const std::string& _title, glm::u16vec2 _resolution, std::shared_ptr<ILogger> _logger) :
+		IWindow(_name, _title, _resolution, _logger)
 	{
+		// If this is the first window, initialize the static logger
 		if (window_counter == 0)
 		{
 			static_logger = IWindow::get_logger();
@@ -21,10 +22,15 @@ namespace focus
 			glfwSetErrorCallback(_error_callback);
 		}
 		++window_counter;
+
+		// Create the actual window
+		glfw_window_handle = glfwCreateWindow(resolution.x, resolution.y, title.c_str(), nullptr, nullptr);
 	}
 
 	WindowGLFW::~WindowGLFW()
 	{
+		glfwDestroyWindow(glfw_window_handle);
+
 		--window_counter;
 		if (window_counter == 0)
 		{

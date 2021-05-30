@@ -3,7 +3,7 @@
 namespace focus
 {
 	Application::Application(
-		std::string _name,
+		const std::string& _name,
 		VersionNumber _version,
 		std::shared_ptr<ILogger> _logger
 	) :

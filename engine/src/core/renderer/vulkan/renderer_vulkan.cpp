@@ -2,14 +2,17 @@
 
 #include <sstream>
 
+#include <bitset>
+#include <iostream>
+
 #include "core/application_layer/application.hpp"
 
 namespace focus
 {
 	RendererVulkan::RendererVulkan(
 		std::string _name,
-		std::shared_ptr<ILogger> _logger,
-		const Application* _application
+		const Application* _application,
+		std::shared_ptr<ILogger> _logger
 		) :
 		IRenderer(_name, _logger)
 	{
@@ -32,11 +35,11 @@ namespace focus
 				app_version_encoded,
 				engine_name,
 				engine_version_encoded,
-				VK_API_VERSION_1_1
+				vk::enumerateInstanceVersion()
 			);
 
 			// Vulkan instance info
-			const vk::InstanceCreateInfo instance_info({}, &app_info, 0U, nullptr, 0U, nullptr);
+			const vk::InstanceCreateInfo instance_info({}, &app_info, {}, {});
 
 			instance = vk::createInstanceUnique(instance_info);
 		};
@@ -69,8 +72,6 @@ namespace focus
 			}
 		};
 		query_physical_devices();
-
-
 	}
 
 	auto RendererVulkan::get_physical_device_list() const -> std::vector<std::string>
