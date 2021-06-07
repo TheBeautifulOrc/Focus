@@ -68,11 +68,10 @@ namespace focus
 		 * @param new_comp New component to add
 		 */
 		template<EngineComponentSubtype C>
-		inline auto add_subcomponent(std::unique_ptr<C> new_comp) -> C*
+		inline auto add_subcomponent(std::shared_ptr<C> new_comp) -> std::shared_ptr<C>
 		{
-			std::unique_ptr<IEngineComponent> cast_comp = std::move(new_comp);
-			auto key = cast_comp->get_name();
-			subcomponents.insert({ key, std::move(cast_comp) });
+			auto key = new_comp->get_name();
+			subcomponents.insert({ key, new_comp });
 			return get_subcomponent<C>(key);
 		}
 

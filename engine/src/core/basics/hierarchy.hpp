@@ -32,11 +32,10 @@ namespace focus
 		 * @return Pointer to the newly added subcomponent.
 		 */
 		template<typename C>
-		inline auto add_subcomponent(std::unique_ptr<C> new_comp, std::string key) -> C*
+		inline auto add_subcomponent(std::shared_ptr<C> new_comp, std::string key) -> std::shared_ptr<C>
 		{
 			static_assert(std::is_base_of<T, C>(), "Subcomponent is of unfitting type.");
-			std::unique_ptr<T> cast_comp = std::move(new_comp);
-			subcomponents.insert({key, std::move(cast_comp)});
+			subcomponents.insert({key, new_comp});
 			return get_subcomponent<C>(key);
 		}
 
@@ -48,15 +47,14 @@ namespace focus
 		 * @return Pointer to the requested subcomponent.
 		 */
 		template<typename C>
-		inline auto get_subcomponent(const std::string& comp_name) const -> C*
+		inline auto get_subcomponent(const std::string& comp_name) const -> std::shared_ptr<C>
 		{
-			const auto req_component = subcomponents.at(comp_name).get();
-			if (!is_type<C>(req_component))
+			auto ret = std::dynamic_pointer_cast<C>(subcomponents.at(comp_name));
+			if (ret.get() == nullptr)
 			{
-				error("Engine component not of requested type.");
-				return nullptr;
+				error("Wrong type requested");
 			}
-			return dynamic_cast<C*>(req_component);
+			return ret;
 		}
 
 		virtual void info(const std::string& msg) const = 0;
@@ -81,16 +79,16 @@ namespace focus
 		 *
 		 * @return Ownership pointer of the popped subcomponent.
 		 */
-		auto pop_subcomponent(const std::string& comp_name) -> std::unique_ptr<T>
+		auto pop_subcomponent(const std::string& comp_name) -> std::shared_ptr<T>
 		{
-			auto ret_comp = std::move(subcomponents.at(comp_name));
+			auto ret_comp = subcomponents.at(comp_name);
 			remove_subcomponent(comp_name);
-			return std::move(ret_comp);
+			return ret_comp;
 		}
 
 	protected:
 		// Subcomponents owned by this element
-		std::map<const std::string, std::unique_ptr<T>> subcomponents;
+		std::map<const std::string, std::shared_ptr<T>> subcomponents;
 	};
 
 } // namespace focus

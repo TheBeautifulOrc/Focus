@@ -52,6 +52,7 @@ namespace focus
 	private:
 		vk::UniqueInstance instance;
 		std::map<std::string, vk::PhysicalDevice> physical_devices;
+		vk::UniqueSurfaceKHR surface;
 
 		template<size_t size>
 		inline auto extract_vulkan_string(vk::ArrayWrapper1D<char, size> vk_string) -> std::string

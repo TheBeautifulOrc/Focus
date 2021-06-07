@@ -1,9 +1,6 @@
 #include "renderer_vulkan.hpp"
 
-#include <sstream>
-
-#include <bitset>
-#include <iostream>
+#include <array>
 
 #include "core/application_layer/application.hpp"
 
@@ -38,8 +35,16 @@ namespace focus
 				vk::enumerateInstanceVersion()
 			);
 
+			// Used Vulkan layers
+			std::array<const char* const, 0> layers{};
+			vk::ArrayProxyNoTemporaries layer_arr(layers);
+
+			// Used Vulkan extensions
+			std::array<const char* const, 1> extensions{ "VK_KHR_surface" };
+			vk::ArrayProxyNoTemporaries extension_arr(extensions);
+
 			// Vulkan instance info
-			const vk::InstanceCreateInfo instance_info({}, &app_info, {}, {});
+			const vk::InstanceCreateInfo instance_info({}, &app_info, layer_arr, extension_arr);
 
 			instance = vk::createInstanceUnique(instance_info);
 		};
@@ -72,6 +77,9 @@ namespace focus
 			}
 		};
 		query_physical_devices();
+
+		// Create Vulkan surface
+
 	}
 
 	auto RendererVulkan::get_physical_device_list() const -> std::vector<std::string>

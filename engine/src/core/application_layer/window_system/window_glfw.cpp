@@ -7,8 +7,13 @@
 
 namespace focus
 {
-	WindowGLFW::WindowGLFW(const std::string& _name, const std::string& _title, glm::u16vec2 _resolution, std::shared_ptr<ILogger> _logger) :
-		IWindow(_name, _title, _resolution, _logger)
+	WindowGLFW::WindowGLFW(
+		const std::string& _name,
+		const std::string& _title,
+		glm::u16vec2 _resolution,
+		std::shared_ptr<RendererVulkan> _renderer,
+		std::shared_ptr<ILogger> _logger)
+		: IWindow(_name, _title, _resolution, _renderer, _logger)
 	{
 		// If this is the first window, initialize the static logger
 		if (window_counter == 0)

@@ -1,8 +1,10 @@
 #pragma once
 
+#define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
 #include "core/application_layer/window_system/window.hpp"
+#include "core/renderer/vulkan/renderer_vulkan.hpp"
 #include "core/logging_system/spdlogger.hpp"
 
 namespace focus
@@ -25,6 +27,7 @@ namespace focus
 			const std::string& _name,
 			const std::string& _title,
 			glm::u16vec2 _resolution,
+			std::shared_ptr<RendererVulkan> _renderer,
 			std::shared_ptr<ILogger> _logger
 		);
 		~WindowGLFW();
