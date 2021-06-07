@@ -17,17 +17,17 @@ namespace focus
 		auto create_instance = [&]()
 		{
 			// App info
-			const char* app_name = _application->get_name().c_str();
-			const VersionNumber& app_version = _application->get_version();
-			uint32_t app_version_encoded = VK_MAKE_API_VERSION(0, app_version.major, app_version.minor, app_version.patch);
+			auto app_name = _application->get_name().c_str();
+			auto& app_version = _application->get_version();
+			auto app_version_encoded = VK_MAKE_API_VERSION(0, app_version.major, app_version.minor, app_version.patch);
 
 			// Engine info
-			const char* engine_name = constants::engine_name.c_str();
-			const VersionNumber& engine_version = constants::engine_version;
-			uint32_t engine_version_encoded = VK_MAKE_API_VERSION(0, engine_version.major, engine_version.minor, engine_version.patch);
+			auto engine_name = constants::engine_name.c_str();
+			auto& engine_version = constants::engine_version;
+			auto engine_version_encoded = VK_MAKE_API_VERSION(0, engine_version.major, engine_version.minor, engine_version.patch);
 
 			// Vulkan application info struct
-			const vk::ApplicationInfo app_info(
+			auto app_info = vk::ApplicationInfo(
 				app_name,
 				app_version_encoded,
 				engine_name,
@@ -36,15 +36,15 @@ namespace focus
 			);
 
 			// Used Vulkan layers
-			std::array<const char* const, 0> layers{};
-			vk::ArrayProxyNoTemporaries layer_arr(layers);
+			auto layers = std::array<const char* const, 0UL>{};
+			auto layer_arr = vk::ArrayProxyNoTemporaries(layers);
 
 			// Used Vulkan extensions
-			std::array<const char* const, 1> extensions{ "VK_KHR_surface" };
-			vk::ArrayProxyNoTemporaries extension_arr(extensions);
+			auto extensions = std::array<const char* const, 1UL>{"VK_KHR_surface"};
+			auto extension_arr = vk::ArrayProxyNoTemporaries(extensions);
 
 			// Vulkan instance info
-			const vk::InstanceCreateInfo instance_info({}, &app_info, layer_arr, extension_arr);
+			auto instance_info = vk::InstanceCreateInfo({}, &app_info, layer_arr, extension_arr);
 
 			instance = vk::createInstanceUnique(instance_info);
 		};
@@ -66,8 +66,8 @@ namespace focus
 
 				// Insert into map of all present devices
 				// (add number to name in case multiple devices with the same name exist)
-				std::string final_device_name = device_name;	// Final name of the device (no duplicates)
-				size_t duplicate_counter = 1;
+				auto final_device_name = device_name;	// Final name of the device (no duplicates)
+				auto duplicate_counter = 1UL;
 				while (physical_devices.find(final_device_name) != physical_devices.end())
 				{
 					++duplicate_counter;

@@ -57,12 +57,12 @@ namespace focus
 		template<size_t size>
 		inline auto extract_vulkan_string(vk::ArrayWrapper1D<char, size> vk_string) -> std::string
 		{
-			size_t char_counter = 0;
+			auto char_counter = 0UL;
 			while (vk_string.at(char_counter) != 0)
 			{
 				++char_counter;
 			}
-			std::string result_string(vk_string.begin(), vk_string.begin()+char_counter);
+			auto result_string = std::string(vk_string.begin(), vk_string.begin()+char_counter);
 			return result_string;
 		}
 	};

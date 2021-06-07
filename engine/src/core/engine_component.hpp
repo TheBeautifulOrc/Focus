@@ -91,7 +91,7 @@ namespace focus
 		IEngineComponent(
 			const std::string& _name,
 			std::shared_ptr<ILogger> _logger
-		);
+		) : name{_name}, logger{_logger} {};
 
 	public:
 		virtual ~IEngineComponent() = default;

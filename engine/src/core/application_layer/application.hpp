@@ -27,7 +27,8 @@ namespace focus
 			const std::string& _name,
 			VersionNumber _version,
 			std::shared_ptr<ILogger> _logger = std::make_shared<LoggerSPD>()
-		);
+		) : IEngineComponent(_name, _logger), version(_version) {}
+
 		~Application() = default;
 
 		/**

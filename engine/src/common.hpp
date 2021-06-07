@@ -32,9 +32,9 @@ namespace focus
 	namespace constants
 	{
 		// Name of this engine
-		const std::string engine_name = "Focus Engine";
+		const auto engine_name = std::string("Focus Engine");
 		// Current version number of this engine
-		const VersionNumber engine_version(0, 1, 0);
+		const auto engine_version = VersionNumber(0, 1, 0);
 
 	} // namespace constants
 
