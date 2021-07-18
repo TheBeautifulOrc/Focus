@@ -14,15 +14,16 @@ void print_type(const T& thing)
 int main(int argc, char** argv)
 {
 	// Create application
-	Application app("Focus Editor", VersionNumber(0,1,0));
-
-	// Intialize Vulkan renderer
-	auto renderer = std::make_shared<RendererVulkan>("Vulkan Renderer", &app, app.get_logger());
-	app.add_subcomponent(renderer);
+	auto app = std::make_shared<Application>("Focus Editor", VersionNumber(0,1,0));
 
 	// Initialize GLFW application window
-	auto window = std::make_shared<WindowGLFW>("GLFW Window", "Focus Engine Editor", glm::u16vec2(1280, 720), renderer, app.get_logger());
-	app.add_subcomponent(window);
+	auto window = std::make_shared<WindowGLFW>("GLFW Window", "Focus Engine Editor", glm::u16vec2(1280, 720), app->get_logger());
+	app->add_subcomponent(window);
+
+	// Intialize Vulkan renderer
+	auto renderer = std::make_shared<RendererVulkan>("Vulkan Renderer", app, window, app->get_logger());
+	app->add_subcomponent(renderer);
+	// renderer->test_func();
 
 	return 0;
 }

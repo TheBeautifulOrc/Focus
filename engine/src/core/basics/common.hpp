@@ -18,7 +18,7 @@ namespace focus
 		 * @param _minor Version minor number.
 		 * @param _patch Version patch number.
 		 */
-		inline VersionNumber(uint8_t _major, uint16_t _minor, uint16_t _patch) :
+		VersionNumber(uint8_t _major, uint16_t _minor, uint16_t _patch) :
 			major(_major),
 			minor(_minor),
 			patch(_patch)

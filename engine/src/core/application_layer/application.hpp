@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "common.hpp"
+#include "core/basics/common.hpp"
 #include "core/engine_component.hpp"
 #include "core/logging_system/spdlogger.hpp"
 
@@ -36,7 +36,7 @@ namespace focus
 		 *
 		 * @return Version number of this application.
 		 */
-		inline auto get_version() const -> const VersionNumber& { return version; }
+		auto get_version() const -> const VersionNumber& { return version; }
 
 	private:
 		const VersionNumber version;

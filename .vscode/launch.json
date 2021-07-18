@@ -1,0 +1,29 @@
+{
+	"configurations": [
+
+		{
+			"name": "Debug Editor",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/editor/bin/FocusEditor",
+			"args": [],
+			"stopAtEntry": false,
+			"cwd": "${fileDirname}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "gdb",
+			"setupCommands": [
+				{
+					"description": "Enable pretty-printing for gdb",
+					"text": "-enable-pretty-printing",
+					"ignoreFailures": true
+				},
+				{
+					"description": "Add custom libraries to path",
+					"text": "set env LD_LIBRARY_PATH=${workspaceFolder}/engine/shared"
+				}
+			]
+		}
+
+	]
+}

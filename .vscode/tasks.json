@@ -1,0 +1,27 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "BuildDebug",
+			"type": "shell",
+			"command": "scons -j11",
+			"problemMatcher": []
+		},
+		{
+			"label": "DefineLibs",
+			"type": "shell",
+			"command": "LD_LIBRARY_PATH=${workspaceFolder}/engine/shared",
+			"problemMatcher": []
+		},
+		{
+			"label": "ExportLibs",
+			"type": "shell",
+			"command": "export LD_LIBRARY_PATH",
+			"problemMatcher": []
+		},
+		{
+			"label": "PrepareEnv",
+			"dependsOn": ["DefineLibs", "ExportLibs"]
+		}
+	]
+}

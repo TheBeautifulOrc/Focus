@@ -2,8 +2,9 @@
 
 #include "core/engine_component.hpp"
 #include "core/application_layer/application.hpp"
+#include "core/basics/common.hpp"
+#include "core/basics/formatting.hpp"
 #include "core/basics/hierarchy.hpp"
-#include "core/basics/rtti.hpp"
 #include "core/event_system/event.hpp"
 #include "core/event_system/event_handler.hpp"
 #include "core/logging_system/logger.hpp"
@@ -11,4 +12,5 @@
 #include "core/renderer/renderer.hpp"
 #include "core/application_layer/window_system/window.hpp"
 #include "core/application_layer/window_system/window_glfw.hpp"
+#include "core/basics/units/memory.hpp"
 #include "core/renderer/vulkan/renderer_vulkan.hpp"

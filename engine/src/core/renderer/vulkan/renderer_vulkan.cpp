@@ -1,24 +1,44 @@
 #include "renderer_vulkan.hpp"
 
 #include <array>
+#include <iostream>
 
 #include "core/application_layer/application.hpp"
+#include "core/application_layer/window_system/window_glfw.hpp"
 
 namespace focus
 {
 	RendererVulkan::RendererVulkan(
 		std::string _name,
-		const Application* _application,
+		std::shared_ptr<Application> _host_application,
+		std::shared_ptr<WindowGLFW> _window,
 		std::shared_ptr<ILogger> _logger
-		) :
-		IRenderer(_name, _logger)
+	) : IRenderer(_name, _host_application, _window, _logger)
 	{
+		// Used Vulkan layers
+		// None at the moment...
+
+		// Used Vulkan extensions
+		extensions.push_back("VK_KHR_surface");
+		extensions.push_back("VK_KHR_xcb_surface");	// TODO: Implement platform-dependend behaviour
+	}
+
+	void RendererVulkan::prep_instance()
+	{
+		// If host application was already deleted, do nothing and terminate function
+		if (host_application.expired())
+		{
+			error("Host application expired, aborting instance preparation.");
+			return;
+		}
+
 		// Create Vulkan instance
 		auto create_instance = [&]()
 		{
-			// App info
-			auto app_name = _application->get_name().c_str();
-			auto& app_version = _application->get_version();
+			// Create application info
+			auto temp_host_app = host_application.lock();	// Lock host application in current scope
+			auto app_name = temp_host_app->get_name().c_str();
+			auto& app_version = temp_host_app->get_version();
 			auto app_version_encoded = VK_MAKE_API_VERSION(0, app_version.major, app_version.minor, app_version.patch);
 
 			// Engine info
@@ -35,16 +55,12 @@ namespace focus
 				vk::enumerateInstanceVersion()
 			);
 
-			// Used Vulkan layers
-			auto layers = std::array<const char* const, 0UL>{};
-			auto layer_arr = vk::ArrayProxyNoTemporaries(layers);
-
-			// Used Vulkan extensions
-			auto extensions = std::array<const char* const, 1UL>{"VK_KHR_surface"};
-			auto extension_arr = vk::ArrayProxyNoTemporaries(extensions);
+			// Needed layers and extensions
+			auto vk_layers = vk::ArrayProxyNoTemporaries<const char* const>(layers);
+			auto vk_extensions = vk::ArrayProxyNoTemporaries<const char* const>(extensions);
 
 			// Vulkan instance info
-			auto instance_info = vk::InstanceCreateInfo({}, &app_info, layer_arr, extension_arr);
+			auto instance_info = vk::InstanceCreateInfo({}, &app_info, vk_layers, vk_extensions);
 
 			instance = vk::createInstanceUnique(instance_info);
 		};
@@ -77,8 +93,44 @@ namespace focus
 			}
 		};
 		query_physical_devices();
+	}
 
-		// Create Vulkan surface
+	void RendererVulkan::prep_device(const std::string& physical_device_name)
+	{
+		info(physical_device_name);
+		auto device = physical_devices.at(physical_device_name);
+		// Device memory
+		auto mem_props = device.getMemoryProperties();
+		auto mem_string = std::string("\n");
+		auto size_prefixes = std::vector<std::string>{"", "Ki", "Mi", "Gi", "Ti"};
+		auto rounding_prefix = std::vector<std::string>{"", "~"};
+		for (auto type : mem_props.memoryTypes)
+		{
+			auto flags = type.propertyFlags;
+			if (flags)
+			{
+				mem_string += to_string(flags);
+				auto heap = mem_props.memoryHeaps.at(type.heapIndex);
+
+				auto heap_size = heap.size;
+				auto size_counter = 0U;
+				auto dirty_rounding = 0U;
+				while ((heap_size > 1024))
+				{
+					if (heap_size % 1024 != 0)
+					{
+						dirty_rounding = 1U;
+					}
+					heap_size /= 1024;
+					++size_counter;
+				}
+
+				mem_string += "\t" + rounding_prefix.at(dirty_rounding) + std::to_string(heap_size) + size_prefixes.at(size_counter) + "B";
+				mem_string += "\n";
+			}
+		}
+		info(mem_string);
+
 
 	}
 
@@ -91,6 +143,5 @@ namespace focus
 		}
 		return output;
 	}
-
 
 } // namespace focus

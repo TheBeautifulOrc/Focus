@@ -1,6 +1,6 @@
 #pragma once
 
-#define GLFW_INCLUDE_NONE
+#include <vulkan/vulkan.hpp>
 #include <GLFW/glfw3.h>
 
 #include "core/application_layer/window_system/window.hpp"
@@ -27,7 +27,6 @@ namespace focus
 			const std::string& _name,
 			const std::string& _title,
 			glm::u16vec2 _resolution,
-			std::shared_ptr<RendererVulkan> _renderer,
 			std::shared_ptr<ILogger> _logger
 		);
 		~WindowGLFW();
@@ -46,12 +45,14 @@ namespace focus
 		 */
 		static void _error_callback(int error, const char* error_description);
 
+		/**
+		 * @brief Initialization routine that is agnostic towards the used renderer.
+		 */
+		void glfw_init();
+
 		static size_t window_counter;
 		static std::shared_ptr<ILogger> static_logger;
 
 		GLFWwindow* glfw_window_handle;
 	};
-
-	size_t WindowGLFW::window_counter;
-	std::shared_ptr<ILogger> WindowGLFW::static_logger;
 } // namespace focus

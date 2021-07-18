@@ -18,3 +18,5 @@ planning/
 !*.h
 !*.hpp
 !*.cppm
+# JSON settings
+!*.json

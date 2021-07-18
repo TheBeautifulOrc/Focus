@@ -33,7 +33,7 @@ namespace focus
 		 *
 		 * @param event Event that this object should react to.
 		 */
-		virtual inline void process_event(std::shared_ptr<const IEvent> event) {};
+		virtual void process_event(std::shared_ptr<const IEvent> event) {};
 
 		/**
 		 * @brief Invokes 'process_event' fuction on event at the top of the event queue.
@@ -64,7 +64,7 @@ namespace focus
 		/**
 		 * @brief Get number of unprocessed events in event queue.
 		 */
-		virtual inline auto get_queue_size() const -> size_t { return event_queue.size(); }
+		virtual auto get_queue_size() const -> size_t { return event_queue.size(); }
 
 	private:
 		/* Connections to other event handlers: */

@@ -32,35 +32,35 @@ namespace focus
 		 *
 		 * @return Logger of this object. Can be taken partial ownership of.
 		 */
-		inline auto get_logger() const -> std::shared_ptr<ILogger> { return logger; }
+		auto get_logger() const -> std::shared_ptr<ILogger> { return logger; }
 
 		/**
 		 * @brief Logs info-level data.
 		 *
 		 * @param msg Message that shall be logged.
 		 */
-		inline void info(const std::string& msg) const override { logger->info(name, msg); }
+		void info(const std::string& msg) const override { logger->info(name, msg); }
 
 		/**
 		 * @brief Logs warning-level data.
 		 *
 		 * @param msg Message that shall be logged.
 		 */
-		inline void warning(const std::string& msg) const override { logger->warning(name, msg); }
+		void warning(const std::string& msg) const override { logger->warning(name, msg); }
 
 		/**
 		 * @brief Logs error-level data.
 		 *
 		 * @param msg Message that shall be logged.
 		 */
-		inline void error(const std::string& msg) const override { logger->error(name, msg); }
+		void error(const std::string& msg) const override { logger->error(name, msg); }
 
 		/**
 		 * @brief Returns name of this object.
 		 *
 		 * @return Name of this object.
 		 */
-		inline auto get_name() const -> const std::string& { return name; }
+		auto get_name() const -> const std::string& { return name; }
 
 		/**
 		 * @brief Template specialization for adding subcomponents based on this class.
@@ -68,7 +68,7 @@ namespace focus
 		 * @param new_comp New component to add
 		 */
 		template<EngineComponentSubtype C>
-		inline auto add_subcomponent(std::shared_ptr<C> new_comp) -> std::shared_ptr<C>
+		auto add_subcomponent(std::shared_ptr<C> new_comp) -> std::shared_ptr<C>
 		{
 			auto key = new_comp->get_name();
 			subcomponents.insert({ key, new_comp });

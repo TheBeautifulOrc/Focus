@@ -4,8 +4,6 @@
 #include <string>
 #include <memory>
 
-#include "core/basics/rtti.hpp"
-
 namespace focus
 {
 	/**
@@ -32,7 +30,7 @@ namespace focus
 		 * @return Pointer to the newly added subcomponent.
 		 */
 		template<typename C>
-		inline auto add_subcomponent(std::shared_ptr<C> new_comp, std::string key) -> std::shared_ptr<C>
+		auto add_subcomponent(std::shared_ptr<C> new_comp, std::string key) -> std::shared_ptr<C>
 		{
 			static_assert(std::is_base_of<T, C>(), "Subcomponent is of unfitting type.");
 			subcomponents.insert({key, new_comp});
@@ -47,7 +45,7 @@ namespace focus
 		 * @return Pointer to the requested subcomponent.
 		 */
 		template<typename C>
-		inline auto get_subcomponent(const std::string& comp_name) const -> std::shared_ptr<C>
+		auto get_subcomponent(const std::string& comp_name) const -> std::shared_ptr<C>
 		{
 			auto ret = std::dynamic_pointer_cast<C>(subcomponents.at(comp_name));
 			if (ret.get() == nullptr)
@@ -68,7 +66,7 @@ namespace focus
 		 *
 		 * @param comp_name Name of the subcomponent that shall be deleted.
 		 */
-		inline void remove_subcomponent(const std::string& comp_name) { subcomponents.erase(comp_name); }
+		void remove_subcomponent(const std::string& comp_name) { subcomponents.erase(comp_name); }
 
 		/**
 		 * @brief Removes an engine component from the list of subcomponents and returns it.
