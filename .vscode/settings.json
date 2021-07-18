@@ -87,6 +87,7 @@
 		"any": "cpp",
 		"queue": "cpp",
 		"numbers": "cpp",
-		"semaphore": "cpp"
+		"semaphore": "cpp",
+		"*.def": "cpp"
 	}
 }

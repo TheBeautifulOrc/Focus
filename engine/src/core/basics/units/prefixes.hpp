@@ -16,9 +16,13 @@ namespace focus
 		UnitPrefixSystem(size_t _base, std::unordered_map<std::string, int> _prefixes) : base(_base), prefixes(_prefixes) {}
 		~UnitPrefixSystem() = default;
 
-		auto get_prefixes() -> const std::unordered_map<std::string, int>&
+		auto get_prefixes() const -> const std::unordered_map<std::string, int>&
 		{
 			return prefixes;
+		}
+		auto get_base() const -> size_t
+		{
+			return base;
 		}
 
 	private:
