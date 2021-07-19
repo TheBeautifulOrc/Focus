@@ -2,6 +2,9 @@
 
 #include <map>
 #include <string>
+#include <cmath>
+
+#include "core/basics/concepts.hpp"
 
 namespace focus
 {
@@ -13,53 +16,45 @@ namespace focus
 	class UnitPrefixSystem
 	{
 	public:
-		UnitPrefixSystem(size_t _base, std::unordered_map<std::string, int> _prefixes) : base(_base), prefixes(_prefixes) {}
+		UnitPrefixSystem(std::map<long double, std::string> _prefixes) : prefixes(_prefixes) {}
 		~UnitPrefixSystem() = default;
 
-		auto get_prefixes() const -> const std::unordered_map<std::string, int>&
+		auto get() const -> const std::map<long double, std::string>&
 		{
 			return prefixes;
 		}
-		auto get_base() const -> size_t
-		{
-			return base;
-		}
 
 	private:
-		// Base of this prefix system.
-		size_t base;
-		// List of prefixes and their
-		std::unordered_map<std::string, int> prefixes;
+		// List prefix values and their symbols
+		std::map<long double, std::string> prefixes;
 	};
 
-	const auto memory_prefixes = UnitPrefixSystem(1024, {
-		{"Ki", 1},
-		{"Mi", 2},
-		{"Gi", 3},
-		{"Ti", 4}
-	});
+	const auto memory_prefixes = UnitPrefixSystem({
+		{pow(1042, 1), "Ki"},
+		{pow(1024, 2), "Mi"},
+		{pow(1024, 3), "Gi"},
+		{pow(1024, 4), "Ti"}});
 
-	const auto metric_prefixes = UnitPrefixSystem(10, {
-		{"y", -24},
-		{"z", -21},
-		{"a", -18},
-		{"f", -15},
-		{"p", -12},
-		{"n", -9},
-		{"u", -6},
-		{"m", -3},
-		{"c", -2},
-		{"d", -1},
-		{"da", 1},
-		{"h", 2},
-		{"k", 3},
-		{"M", 6},
-		{"G", 9},
-		{"T", 12},
-		{"P", 15},
-		{"E", 18},
-		{"Z", 21},
-		{"Y", 24}
-	});
+	const auto metric_prefixes = UnitPrefixSystem({
+		{pow(10, -24), "y"},
+		{pow(10, -21), "z"},
+		{pow(10, -18), "a"},
+		{pow(10, -15), "f"},
+		{pow(10, -12), "p"},
+		{pow(10, -9), "n"},
+		{pow(10, -6), "u"},
+		{pow(10, -3), "m"},
+		{pow(10, -2), "c"},
+		{pow(10, -1), "d"},
+		{pow(10, 1), "da"},
+		{pow(10, 2), "h"},
+		{pow(10, 3), "k"},
+		{pow(10, 6), "M"},
+		{pow(10, 9), "G"},
+		{pow(10, 12), "T"},
+		{pow(10, 15), "P"},
+		{pow(10, 18), "E"},
+		{pow(10, 21), "Z"},
+		{pow(10, 24), "Y"}});
 
 } // namespace focus

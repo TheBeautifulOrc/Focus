@@ -6,7 +6,9 @@
 #include <cmath>
 #include <iostream>
 
+#include "core/basics/concepts.hpp"
 #include "core/basics/units/prefixes.hpp"
+#include "core/basics/formatting.hpp"
 
 namespace focus
 {
@@ -14,21 +16,11 @@ namespace focus
 	 * @brief This class serves as the base for all units that may be used inside the Focus Engine.
 	 */
 	template<Numeric N>
-	class Unit
+	class IUnit
 	{
 	public:
-		// Constructor for common units
-		Unit(std::string _symbol, UnitPrefixSystem _prefix_system) : symbol(_symbol), prefix_system(_prefix_system)
-		{
-			for (const auto& [key, val] : prefix_system->get_prefixes())
-			{
-				inverse_prefix_map.insert({ val, key });
-			}
-		}
-		// Constructor for units that can't be prefixed
-		Unit(std::string _symbol) : symbol(_symbol) {}
-
-		~Unit() = default;
+		IUnit(N value) : internal_representation(value) {};
+		virtual ~IUnit() = default;
 
 		// Underlying numerical representation of the units value
 		N internal_representation;
@@ -38,16 +30,17 @@ namespace focus
 			auto temp_repr = static_cast<long double>(internal_representation);
 			auto print_repr = std::pair<long double, std::string>({temp_repr, ""});
 
+			// Get objects prefix-system
+			auto prefix_system = this->prefix_system();
+
 			// Only select fitting prefix if there are any available
-			if ((prefix_system.has_value()) && (prefix_system->get_prefixes().size() > 0))
+			if (prefix_system.get().size() > 0)
 			{
-				// Base of this prefix-system
-				auto base = prefix_system->get_base();
 				// Check each exponent in ascending order (value gets smaller)
-				for (const auto& [key, value] : inverse_prefix_map)
+				for (const auto& [key, value] : prefix_system.get())
 				{
 					// Calculate possible representation
-					auto possible_repr = temp_repr / pow(base, key);
+					auto possible_repr = temp_repr / key;
 					// If it is larger than 1, this exponent may be valid
 					if (possible_repr > 1)
 					{
@@ -60,21 +53,23 @@ namespace focus
 					}
 				}
 			}
-			return ftos(print_repr.first) + print_repr.second + symbol;
+			return ftos(print_repr.first) + print_repr.second + symbol();
 		}
 
-		std::ostream& operator<<(std::ostream& os) const
-		{
-			os << std::string(*this);
-			return os;
-		}
-
-	private:
 		// Unit symbol, e.g. "m" for meters
-		const std::string symbol;
+		virtual std::string symbol() const = 0;
 		// The prefix-system used by this unit (if there is one)
-		std::optional<const UnitPrefixSystem&> prefix_system;
-		// Inverse of the prefix-systems value mapping
-		std::map<int, std::string> inverse_prefix_map;
+		virtual UnitPrefixSystem prefix_system() const
+		{
+			return UnitPrefixSystem(std::map<long double, std::string>());
+		}
 	};
+
+	template<typename N>
+	std::ostream& operator<<(std::ostream& os, const IUnit<N>& value)
+	{
+		os << std::string(value);
+		return os;
+	}
+
 } // namespace focus
