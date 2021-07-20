@@ -5,6 +5,7 @@
 
 #include "core/application_layer/application.hpp"
 #include "core/application_layer/window_system/window_glfw.hpp"
+#include "core/basics/units/memory.hpp"
 
 namespace focus
 {
@@ -101,35 +102,16 @@ namespace focus
 		auto device = physical_devices.at(physical_device_name);
 		// Device memory
 		auto mem_props = device.getMemoryProperties();
-		auto mem_string = std::string("\n");
-		auto size_prefixes = std::vector<std::string>{"", "Ki", "Mi", "Gi", "Ti"};
-		auto rounding_prefix = std::vector<std::string>{"", "~"};
 		for (auto type : mem_props.memoryTypes)
 		{
 			auto flags = type.propertyFlags;
 			if (flags)
 			{
-				mem_string += to_string(flags);
 				auto heap = mem_props.memoryHeaps.at(type.heapIndex);
-
-				auto heap_size = heap.size;
-				auto size_counter = 0U;
-				auto dirty_rounding = 0U;
-				while ((heap_size > 1024))
-				{
-					if (heap_size % 1024 != 0)
-					{
-						dirty_rounding = 1U;
-					}
-					heap_size /= 1024;
-					++size_counter;
-				}
-
-				mem_string += "\t" + rounding_prefix.at(dirty_rounding) + std::to_string(heap_size) + size_prefixes.at(size_counter) + "B";
-				mem_string += "\n";
+				auto heap_size = Memory(heap.size);
+				info(to_string(flags) + " " + std::string(heap_size));
 			}
 		}
-		info(mem_string);
 
 
 	}

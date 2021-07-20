@@ -23,7 +23,7 @@ int main(int argc, char** argv)
 	// Intialize Vulkan renderer
 	auto renderer = std::make_shared<RendererVulkan>("Vulkan Renderer", app, window, app->get_logger());
 	app->add_subcomponent(renderer);
-	// renderer->test_func();
+	renderer->test_func();
 
 	return 0;
 }
