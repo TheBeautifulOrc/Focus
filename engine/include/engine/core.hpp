@@ -6,6 +6,7 @@
 #include "core/basics/concepts.hpp"
 #include "core/basics/formatting.hpp"
 #include "core/basics/hierarchy.hpp"
+#include "core/basics/memory.hpp"
 #include "core/event_system/event.hpp"
 #include "core/event_system/event_handler.hpp"
 #include "core/logging_system/logger.hpp"

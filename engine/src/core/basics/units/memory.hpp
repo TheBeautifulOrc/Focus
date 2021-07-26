@@ -17,9 +17,9 @@ namespace focus
 			return "B";
 		}
 
-		UnitPrefixSystem prefix_system() const override
+		std::pair<const UnitPrefix*, size_t> prefix_system() const override
 		{
-			return memory_prefixes;
+			return { memory_prefixes, n_memory_prefixes };
 		}
 
 		Memory& operator+=(const Memory& rhs)

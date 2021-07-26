@@ -5,6 +5,7 @@
 #include <variant>
 #include <cmath>
 #include <iostream>
+#include <tuple>
 
 #include "core/basics/concepts.hpp"
 #include "core/basics/units/prefixes.hpp"
@@ -27,24 +28,27 @@ namespace focus
 
 		operator std::string() const
 		{
+			// Initialize representation as internal value without prefix
 			auto temp_repr = static_cast<long double>(internal_representation);
 			auto print_repr = std::pair<long double, std::string>({temp_repr, ""});
 
 			// Get objects prefix-system
-			auto prefix_system = this->prefix_system();
+			const auto [pref_sys, n_pref] = prefix_system();
 
 			// Only select fitting prefix if there are any available
-			if (prefix_system.get().size() > 0)
+			if (n_pref > 0)
 			{
 				// Check each exponent in ascending order (value gets smaller)
-				for (const auto& [key, value] : prefix_system.get())
+				for (size_t i = 0; i < n_pref; ++i)
 				{
+					const auto& curr_pref = pref_sys[i];
+
 					// Calculate possible representation
-					auto possible_repr = temp_repr / key;
+					auto possible_repr = temp_repr / curr_pref.value;
 					// If it is larger than 1, this exponent may be valid
 					if (possible_repr > 1)
 					{
-						print_repr = {possible_repr, value};
+						print_repr = {possible_repr, curr_pref.symbol};
 					}
 					// Else stop checking, since it will only get worse from here on
 					else
@@ -59,10 +63,7 @@ namespace focus
 		// Unit symbol, e.g. "m" for meters
 		virtual std::string symbol() const = 0;
 		// The prefix-system used by this unit (if there is one)
-		virtual UnitPrefixSystem prefix_system() const
-		{
-			return UnitPrefixSystem(std::map<long double, std::string>());
-		}
+		virtual std::pair<const UnitPrefix*, size_t> prefix_system() const { return {nullptr, 0}; }
 	};
 
 	template<typename N>

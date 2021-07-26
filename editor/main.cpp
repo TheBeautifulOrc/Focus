@@ -25,5 +25,7 @@ int main(int argc, char** argv)
 	app->add_subcomponent(renderer);
 	renderer->test_func();
 
+	cout << 1000000_B << endl;
+
 	return 0;
 }
