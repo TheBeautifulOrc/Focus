@@ -2,7 +2,7 @@
 
 #include "core/engine_component.hpp"
 #include "core/application_layer/application.hpp"
-#include "core/basics/common.hpp"
+#include "core/basics/app_info.hpp"
 #include "core/basics/concepts.hpp"
 #include "core/basics/formatting.hpp"
 #include "core/basics/hierarchy.hpp"

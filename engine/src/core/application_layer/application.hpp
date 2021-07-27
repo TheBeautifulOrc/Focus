@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "core/basics/common.hpp"
+#include "core/basics/app_info.hpp"
 #include "core/engine_component.hpp"
 #include "core/logging_system/spdlogger.hpp"
 

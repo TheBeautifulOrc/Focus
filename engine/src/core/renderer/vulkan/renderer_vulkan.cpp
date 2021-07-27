@@ -43,7 +43,7 @@ namespace focus
 			auto app_version_encoded = VK_MAKE_API_VERSION(0, app_version.major, app_version.minor, app_version.patch);
 
 			// Engine info
-			auto engine_name = constants::engine_name.c_str();
+			auto engine_name = constants::engine_name;
 			auto& engine_version = constants::engine_version;
 			auto engine_version_encoded = VK_MAKE_API_VERSION(0, engine_version.major, engine_version.minor, engine_version.patch);
 

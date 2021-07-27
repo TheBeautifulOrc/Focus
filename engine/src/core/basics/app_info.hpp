@@ -18,7 +18,7 @@ namespace focus
 		 * @param _minor Version minor number.
 		 * @param _patch Version patch number.
 		 */
-		VersionNumber(uint8_t _major, uint16_t _minor, uint16_t _patch) :
+		constexpr VersionNumber(uint8_t _major, uint16_t _minor, uint16_t _patch) :
 			major(_major),
 			minor(_minor),
 			patch(_patch)
@@ -32,9 +32,9 @@ namespace focus
 	namespace constants
 	{
 		// Name of this engine
-		const auto engine_name = std::string("Focus Engine");
+		constexpr auto engine_name {"Focus Engine"};
 		// Current version number of this engine
-		const auto engine_version = VersionNumber(0, 1, 0);
+		constexpr auto engine_version = VersionNumber(0, 1, 0);
 
 	} // namespace constants
 
